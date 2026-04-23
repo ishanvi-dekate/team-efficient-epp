@@ -76,7 +76,7 @@ function GoogleLogin() {
       {/* If user is logged in, show greeting, logout button, and messages */}
       {user ? (
         <div>
-          <h2>Hello, {user.displayName}</h2>
+          <h2>Hello! {user.displayName}</h2>
           <button onClick={handleLogout}>Log Out</button>
 
           <ul>
