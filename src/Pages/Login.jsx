@@ -96,4 +96,3 @@ function GoogleLogin() {
     </div>
   );
 }
-export default GoogleLogin;
