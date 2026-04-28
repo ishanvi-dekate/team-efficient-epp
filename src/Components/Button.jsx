@@ -1,6 +1,6 @@
 import './Button.css';
 
-function Button({ children, onClick, variant = 'primary', fullWidth = false }) {
+function Button({className }) {
   return (
     <button
       className={`btn btn-${variant} ${fullWidth ? 'btn-full' : ''}`}
