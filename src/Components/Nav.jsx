@@ -4,7 +4,6 @@ import Home from '../Pages/Home.jsx';
 
 function Nav({ setPage }) {
   return (
-    <footer>
       <div className='navibar'>
         <ul>
           <li onClick={() => setPage("Home")}>Home</li>
@@ -15,7 +14,6 @@ function Nav({ setPage }) {
           <li onClick={() => setPage("LoginPage")}>Sign-Out</li>
         </ul>
       </div>
-    </footer>
   );
 }
 
