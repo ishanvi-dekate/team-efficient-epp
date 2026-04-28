@@ -1,6 +1,7 @@
 import './Button.css';
-
-function Button({ children, onClick, variant = 'primary', fullWidth = false }) {
+import useState from 'react'
+const [page,setPage] = useState(<></>)
+function Button({text,setPage }) {
   return (
     <button
       className={`btn btn-${variant} ${fullWidth ? 'btn-full' : ''}`}

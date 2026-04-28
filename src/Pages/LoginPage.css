@@ -1,0 +1,24 @@
+.LoginPage {
+    display:flex;
+    background-color: var(--color-11) ;
+    font-family: "etna", sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; 
+    overflow:hidden;
+    position: relative;
+    margin:10px;
+    text-align: center;
+}
+.app-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height:1.2;
+    max-width: 300px;
+    z-index: 10;
+}
+.app-subtitle {
+    font-size: 2rem;
+    margin-right: 2rem;
+    line-height:1.6;
+}

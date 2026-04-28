@@ -8,6 +8,7 @@ function Home() {
     <>
     <header><Header /></header>
     <main className="home-page">
+      <Header />
       <section className="home-card">
        <h2>Welcome Back   !</h2>
        <Card  children=" " title="Stress" className="Stress"/>
