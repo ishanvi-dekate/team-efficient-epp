@@ -2,7 +2,7 @@ import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import './Header.css';
 
-function Header({ user }) {
+function Header({user}) {
   return (
     <header className="header">
       <div className="header-left">
@@ -16,8 +16,7 @@ function Header({ user }) {
           <span className="header-name">efficient.epp</span>
           <span className="header-tag">explore your habits</span>
         </div>
-      </div>    
-
+      </div>
       {user && (
         <div className="header-right">
           <span className="header-welcome">
