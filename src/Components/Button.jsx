@@ -1,13 +1,12 @@
 import './Button.css';
-import useState from 'react'
-const [page,setPage] = useState(<></>)
-function Button({text,setPage }) {
+
+function Button({ text, onClick, className = '' }) {
   return (
     <button
-      className={`btn btn-${variant} ${fullWidth ? 'btn-full' : ''}`}
+      className={`app-button ${className}`}
       onClick={onClick}
     >
-      {children}
+      {text}
     </button>
   );
 }
