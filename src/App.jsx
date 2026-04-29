@@ -2,17 +2,20 @@ import { useState } from "react";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/Loginpage.jsx";
-import Settings from "./Pages/Setting.jsx";
+import Settings from "./Pages/Settings.jsx";
 
 function App() {
-    const [page, setPage] = useState("LoginPage");
+    const [page, setPage] = useState("Home");
 
     return (
         <>
-        <Nav setPage={setPage} />
-            {page === "LoginPage" && <LoginPage />}
+        <footer>
+            
             {page === "Home" && <Home />}
             {page === "Settings" && <Settings />}
+            {page === "LoginPage" && <LoginPage />}
+            <Nav setPage={setPage} />
+            </footer>
         </>
     );
 }

@@ -6,7 +6,6 @@ import App from "../App";
 function Home() {
   return (
     <>
-    <header><Header /></header>
     <main className="home-page">
       <Header />
       <section className="home-card">
