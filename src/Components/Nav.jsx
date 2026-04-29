@@ -15,7 +15,7 @@ function Nav({ setPage }) {
           <li onClick={() => setPage("LoginPage")}>Sign-Out</li>
         </ul>
       </div>
-    </footer>
+      </footer>
   );
 }
 
