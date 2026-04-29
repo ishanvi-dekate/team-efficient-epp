@@ -5,14 +5,17 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import Settings from "./Pages/Settings.jsx";
 
 function App() {
-    const [page, setPage] = useState("LoginPage");
+    const [page, setPage] = useState("Home");
 
     return (
         <>
-        <Nav setPage={setPage} />
-            {page === "LoginPage" && <LoginPage />}
+        <footer>
+            
             {page === "Home" && <Home />}
             {page === "Settings" && <Settings />}
+            {page === "LoginPage" && <LoginPage />}
+            <Nav setPage={setPage} />
+            </footer>
         </>
     );
 }

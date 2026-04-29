@@ -10,8 +10,7 @@ function LoginPage() {
     <h2 className = "app-subtitle"> eXplore YoUr HaBiTs</h2>
     <h4 className = "app-message">Get in charge of your assignments, activities and sleep!</h4>
  </div>
- <Button text = "Hop on through Google" page = {Login} />
-</>
-    );
+ <button onClick = {() => {setPage("/Login")}} > Hop on through Google! </button>
+</>);
 }
 export default LoginPage
