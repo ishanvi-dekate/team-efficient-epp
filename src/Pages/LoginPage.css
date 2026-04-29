@@ -4,11 +4,12 @@
     font-family: "etna", sans-serif;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; 
+    min-height: 100vh; 
     overflow:hidden;
     position: relative;
     margin:10px;
     text-align: center;
+    padding-bottom: 5rem;
 }
 .app-title {
     font-size: 2.5rem;
