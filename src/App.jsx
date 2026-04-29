@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
-import LoginPage from "./Pages/Loginpage.jsx";
+import LoginPage from "./Pages/LoginPage.jsx";
 import Settings from "./Pages/Settings.jsx";
 
 function App() {
