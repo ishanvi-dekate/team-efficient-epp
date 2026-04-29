@@ -11,6 +11,9 @@
     border-color: lightblue;
     border-width: 2px;
 }
+.header-name{
+    margin-left: 10px;
+}
 .header-right{
     background-color: var(--color-3);
 
