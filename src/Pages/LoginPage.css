@@ -18,7 +18,6 @@
   position: relative;
   flex: 1;
   width: 100%;
-  min-height: calc(100vh - 60px); /* leave room for footer */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,9 +132,8 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── MOBILE / SMALL SCREENS ── */
 @media (max-width: 768px) {
-  /* Hide some planets so the layout doesn't get crowded */
+  /* Hide some planets so the layout doesn't get crowded:) */
   .planet-2,
   .planet-comet,
   .planet-7 {

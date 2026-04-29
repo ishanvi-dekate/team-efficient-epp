@@ -8,9 +8,12 @@ import Settings from "./Pages/Settings.jsx";
 function App() {
   const [page, setPage] = useState("LoginPage");
 
+  // Pages that should show the Nav menu (after login)
+  const showNav = page !== "LoginPage" && page !== "Login";
+
   return (
     <>
-      <Nav setPage={setPage} />
+      {showNav && <Nav setPage={setPage} />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
