@@ -1,4 +1,4 @@
-import './Button.css';
+// import './Button.css';
 function Button({text,page}) {
   return (
     <button onClick = {()=> {setPage(page)}}>

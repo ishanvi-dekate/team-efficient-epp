@@ -1,5 +1,5 @@
-import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
+//import { auth } from '../firebase';
+//import { signOut } from 'firebase/auth';
 import './Header.css';
 
 function Header({user}) {
