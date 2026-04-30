@@ -107,14 +107,11 @@ function LoginPage({ setPage }) {
             assignments, activities<br />
             and sleep!
           </p>
-          <>
-            <Button className = "hero-cta" text = "Hop on through Google" page = 'Login'/>
-          //</><button//
-           // className="hero-cta"//
-          //  onClick={() => setPage('Login')}//
+          <button className="hero-cta"
+           onClick={() => setPage('Login')}
           >
-          //  Hop on through Google!
-          //</button>//
+          Hop on through Google!
+          </button>
         </div>
       </section>
 

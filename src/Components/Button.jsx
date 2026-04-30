@@ -1,5 +1,5 @@
 // import './Button.css';
-function Button({text,page}) {
+function Button({text, onClick, className = ''}) {
   return (
     <button className='button' onClick = {()=> {setPage(page)}}>
       {text}

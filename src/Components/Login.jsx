@@ -83,7 +83,13 @@ function Login({ setPage }) {
             Log In
           </button>
         </form>
-
+        <button 
+          type = "button"
+          className = "account"
+          onClick={() => setPage("Account")}
+        > 
+          Can't sign in with Google? Create an account.
+        </button>
         <button
           type="button"
           className="login-back-btn"
