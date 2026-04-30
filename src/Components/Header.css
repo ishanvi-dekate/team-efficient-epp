@@ -1,7 +1,6 @@
 .header {
     display: flex;
     justify-content: center;
-    margin: 40px,20px;
 }
 .header-left {
     background-color: var(--color-10);
