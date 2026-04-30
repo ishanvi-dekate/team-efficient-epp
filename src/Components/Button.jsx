@@ -1,7 +1,11 @@
-// import './Button.css';
-function Button({text,page}) {
+import './Button.css';
+
+function Button({ text, onClick, className = '' }) {
   return (
-    <button className='button' onClick = {()=> {setPage(page)}}>
+    <button
+      className={`app-button ${className}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   );
