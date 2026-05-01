@@ -1,46 +1,109 @@
-import {useState} from 'react'
-import './Account.css'
-function Account(){
-    const [email, setEmail] = useState('')
-    const[password,setPassword] = useState('')
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    
-        if (!email.trim() || !password.trim()) {
-          setError("Please enter both email and password.");
-          return;
-        }
-    
-        if (!email.includes("@")) {
-          setError("Please enter a valid email address.");
-          return;
-        }
-    
-        setError("");
-        // TODO: actually authenticate with Firebase here
-        setPage("Info");
-      };
-    return (
-      <>
-        <div className = "account-sign-up">
-            <h2>Sign Up</h2>
-            <p>Sign up with your email and password</p>
-            <label> Email: </label>
-            <input className='email-input'
-                type= "text"
-                value = {email}
-                onChange={(event) => setEmail(event.target.value)}
-            />
-            <label> Password: </label>
-            <input className='password-input'
-                type = "text"
-                value = {password}
-                onChange = {(event)=> setPassword(event.target.value)}
-            />
-          
+import { useState } from 'react';
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import './Account.css';
 
-        </div>
-        </>
-    )
+function Account({ setPage }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password.');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    setError('');
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      setPage('Home');
+    } catch (err) {
+      // Firebase gives detailed error codes; show a friendly message
+      if (err.code === 'auth/email-already-in-use') {
+        setError('An account with this email already exists.');
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password is too weak. Try a stronger one.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+      console.error(err);
+    }
+  };
+
+  return (
+    <main className="account-page">
+      <section className="account-card">
+        <h1>Sign Up</h1>
+        <p>Create an account to start using efficient.epp.</p>
+
+        {error && <p className="account-error">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="account-form">
+          <label>
+            Email
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="you@example.com"
+            />
+          </label>
+
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="At least 6 characters"
+            />
+          </label>
+
+          <label>
+            Confirm Password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              placeholder="Re-enter your password"
+            />
+          </label>
+
+          <button type="submit" className="account-submit-btn">
+            Create Account
+          </button>
+        </form>
+
+        <button
+          type="button"
+          className="account-back-btn"
+          onClick={() => setPage('Login')}
+        >
+          Already have an account? Log in
+        </button>
+      </section>
+    </main>
+  );
 }
+
 export default Account;
