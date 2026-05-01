@@ -1,0 +1,20 @@
+.account-sign-up{
+    width: 100%;
+    min-height: 100vh;
+    background: #6e5fd0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: 'Nunito', sans-serif;
+    animation: fadeIn 0.4s ease-out;  
+    flex-direction: column;
+}
+.account-sign-up input {
+    padding: 0.75rem 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.15s;
+}

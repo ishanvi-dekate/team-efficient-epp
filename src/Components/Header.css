@@ -1,3 +1,7 @@
+.header {
+    display: flex;
+    justify-content: center;
+}
 .header-left {
     background-color: var(--color-10);
 }
@@ -11,7 +15,14 @@
     border-color: lightblue;
     border-width: 2px;
 }
+.header-name{
+    margin-left: 10px;
+}
 .header-right{
     background-color: var(--color-3);
 
+}
+.header-avatar{
+    border-color: azure;
+    border-radius: 2px;
 }

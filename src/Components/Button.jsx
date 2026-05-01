@@ -1,12 +1,12 @@
 import './Button.css';
 
-function Button({ children, onClick, variant = 'primary', fullWidth = false }) {
+function Button({ text, onClick, className = '' }) {
   return (
     <button
-      className={`btn btn-${variant} ${fullWidth ? 'btn-full' : ''}`}
+      className={`app-button ${className}`}
       onClick={onClick}
     >
-      {children}
+      {text}
     </button>
   );
 }

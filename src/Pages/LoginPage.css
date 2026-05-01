@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ROOT */
+.login-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #1a1a2e;
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* HERO */
+.hero {
+  background: #6e5fd0;
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+.planets-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planet {
+  position: absolute;
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Stagger animation delays so planets float independently */
+.planet-1 { top: 8%;  left: 6%;  width: 130px; height: 130px; animation-delay: 0s; }
+.planet-2 { top: 22%; left: 22%; width: 110px; height: 110px; animation-delay: 1s; }
+.planet-comet { top: 12%; right: 28%; width: 200px; height: 100px; animation-delay: 0.5s; }
+.planet-3 { top: 10%; right: 8%;  width: 130px; height: 130px; animation-delay: 1.5s; }
+.planet-4 { top: 55%; left: 8%;   width: 110px; height: 110px; animation-delay: 2s; }
+.planet-5 { top: 45%; right: 12%; width: 130px; height: 130px; animation-delay: 0.8s; }
+.planet-6 { bottom: 12%; left: 26%; width: 95px; height: 95px; animation-delay: 1.2s; }
+.planet-7 { bottom: 8%; right: 6%;  width: 110px; height: 110px; animation-delay: 1.8s; }
+
+/* Hero content */
+.hero-content {
+  text-align: center;
+  color: white;
+  z-index: 10;
+  animation: slideUp 0.8s ease-out;
+  max-width: 500px;
+  position: relative;
+}
+
+.app-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.app-subtitle {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin: 0 0 18px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 0 30px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hero-cta {
+  background: #3d2c7a;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+}
+
+.hero-cta:hover {
+  background: #4e3a90;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.hero-cta:active {
+  transform: scale(0.97);
+}
+
+/* FOOTER */
+.hero-footer {
+  background: #3a3a3a;
+  color: #aaa;
+  text-align: center;
+  padding: 18px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  width: 100%;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%      { transform: translateY(-12px) rotate(1.5deg); }
+  66%      { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  /* Hide some planets so the layout doesn't get crowded:) */
+  .planet-2,
+  .planet-comet,
+  .planet-7 {
+    display: none;
+  }
+  .planet-1,
+  .planet-3,
+  .planet-4,
+  .planet-5,
+  .planet-6 {
+    width: 70px;
+    height: 70px;
+  }
+}

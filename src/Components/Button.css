@@ -1,0 +1,6 @@
+.button {
+    background-color:var(--color-10);
+    border-radius: 5rem;
+    color:rgb(rgb(27, 82, 211), green, blue);
+    font-size: 50;
+}

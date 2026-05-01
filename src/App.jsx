@@ -1,18 +1,26 @@
 import { useState } from "react";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
-import Login from "./Pages/Login.jsx";
+import LoginPage from "./Pages/LoginPage.jsx";
+import Login from "./Components/Login.jsx";
+import Settings from "./Pages/Settings.jsx";
 
 function App() {
-    const [page, setPage] = useState("login");
+  const [page, setPage] = useState("LoginPage");
+
+  // Pages that should show the Nav menu (after login)
+  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home"; 
 
     return (
         <>
-            <Nav setPage={setPage} />
-            {page === "login" && <Login onLogin={() => setPage("home")} />}
-            {page === "home" && <Home />}
+      
+      {page === "LoginPage" && <LoginPage setPage={setPage} />}
+      {page === "Login" && <Login setPage={setPage} />}
+      {page === "Home" && <Home setPage={setPage} />}
+      {page === "Settings" && <Settings setPage={setPage} />}
+      {showNav && <Nav setPage={setPage} />}
         </>
     );
 }
 
-export default App
+export default App;
