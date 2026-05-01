@@ -54,7 +54,7 @@ function Account({ setPage }) {
     <main className="account-page">
       <section className="account-card">
         <h1>Sign Up</h1>
-        <p>Create an account to start using efficient.epp.</p>
+        <p>Sign up to start using efficient.epp.</p>
 
         {error && <p className="account-error">{error}</p>}
 
@@ -90,7 +90,7 @@ function Account({ setPage }) {
           </label>
 
           <button type="submit" className="account-submit-btn">
-            Create Account
+            Sign Up
           </button>
         </form>
 
