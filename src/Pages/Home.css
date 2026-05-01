@@ -12,3 +12,10 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
+.home-page {
+    width: 100%;
+    min-height: 100%;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+  }
