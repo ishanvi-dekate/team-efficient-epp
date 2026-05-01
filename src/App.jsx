@@ -3,6 +3,7 @@ import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
+import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 
 function App() {
@@ -11,16 +12,16 @@ function App() {
   // Pages that should show the Nav menu (after login)
   const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home" && page !== "Account" && page!=="Info"; 
 
-    return (
-        <>
-      
+  return (
+    <>
+      {showNav && <Nav setPage={setPage} />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
+      {page === "Account" && <Account setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
-      {showNav && <Nav setPage={setPage} />}
-        </>
-    );
+    </>
+  );
 }
 
 export default App;
