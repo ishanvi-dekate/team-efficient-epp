@@ -9,7 +9,7 @@ function App() {
   const [page, setPage] = useState("LoginPage");
 
   // Pages that should show the Nav menu (after login)
-  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home"; 
+  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home" && page !== "Account" && page!=="Info"; 
 
     return (
         <>

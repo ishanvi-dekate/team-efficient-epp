@@ -37,7 +37,7 @@ function Account(){
                 value = {password}
                 onChange = {(event)=> setPassword(event.target.value)}
             />
-          
+            <button className='set account'> Sign up</button>
 
         </div>
         </>
