@@ -18,9 +18,10 @@ function Account(){
     
         setError("");
         // TODO: actually authenticate with Firebase here
-        setPage("Home");
+        setPage("Info");
       };
     return (
+      <>
         <div className = "account-sign-up">
             <h2>Sign Up</h2>
             <p>Sign up with your email and password</p>
@@ -36,8 +37,10 @@ function Account(){
                 value = {password}
                 onChange = {(event)=> setPassword(event.target.value)}
             />
+          
 
         </div>
+        </>
     )
 }
 export default Account;

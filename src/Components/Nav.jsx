@@ -1,4 +1,4 @@
-import './nav.css';
+import './Nav.css';
 import { useState } from 'react';
 import Home from '../Pages/Home.jsx';
 
