@@ -1,0 +1,32 @@
+.hero-footer {
+    background: #3a3a3a;
+    color: #aaa;
+    text-align: center;
+    padding: 18px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    width: 100%;
+  }
+.mental-banner {
+    background: #A5BDF4;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.mental-title {
+    margin: 0;
+    color: #FFFFFF;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .mental-page {
+    width: 100%;
+    min-height: 100%;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+  }

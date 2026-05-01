@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './Settings.css';
+import Header from '../Components/Header';
 
 function Settings() {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ function Settings() {
   ];
 
   return (
+    <>
+    <Header />
     <div className="settings-page">
       <div className="settings-banner">
         <h1 className="settings-title">Settings</h1>
@@ -33,6 +36,7 @@ function Settings() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
