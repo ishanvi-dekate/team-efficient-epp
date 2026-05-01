@@ -1,5 +1,5 @@
 import './LoginPage.css';
-import Button from "../Components/Button.jsx"
+
 function LoginPage({ setPage }) {
   return (
     <div className="login-root">
@@ -107,10 +107,11 @@ function LoginPage({ setPage }) {
             assignments, activities<br />
             and sleep!
           </p>
-          <button className="hero-cta"
-           onClick={() => setPage('Login')}
+          <button
+            className="hero-cta"
+            onClick={() => setPage('Login')}
           >
-          Hop on through Google!
+            Hop on through Google!
           </button>
         </div>
       </section>

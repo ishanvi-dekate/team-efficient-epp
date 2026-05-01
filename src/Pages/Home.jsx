@@ -3,7 +3,8 @@ import { useState } from "react";
 import Nav from "../Components/Nav";
 import Card from "../Components/Card";
 import App from "../App";
-function Home() {
+import Button from "../Components/Button";
+function Home({setPage}) {
   return (
     <>
     <main className="home-page">
@@ -15,6 +16,11 @@ function Home() {
        <Card  children=" " title="Sleep" className="Sleep"/>
       </section>
       <section className="home-buttons">
+        <Button text="View To-Do list" onClick={() => setPage('To-Do')} className="BigButton"/>
+        <Button text="View Mental State" onClick={() => setPage('Mental')} className="BigButton"/>
+        <Button text="View Profile" onClick={() => setPage('Profile')} className="BigButton"/>
+        <Button text="View Settings" onClick={() => setPage('Settings')} className="BigButton"/>
+        <Button text="Log out" onClick={() => setPage('LoginPage')} className="SmallButton"/>
       </section>
     </main>
     </>
