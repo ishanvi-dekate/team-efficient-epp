@@ -8,7 +8,6 @@ function Login({ setPage }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Handle email/password form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -27,7 +26,6 @@ function Login({ setPage }) {
     setPage("Home");
   };
 
-  // Handle Google sign-in
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
@@ -83,13 +81,15 @@ function Login({ setPage }) {
             Log In
           </button>
         </form>
-        <button 
-          type = "button"
-          className = "account"
+
+        <button
+          type="button"
+          className="login-signup-link"
           onClick={() => setPage("Account")}
-        > 
-          Can't sign in with Google? Create an account.
+        >
+          Don't have an account? Create one.
         </button>
+
         <button
           type="button"
           className="login-back-btn"

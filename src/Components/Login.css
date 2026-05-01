@@ -157,3 +157,21 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+.login-signup-link {
+  display: block;
+  margin: 1rem auto 0;
+  background: none;
+  border: none;
+  color: #6e5fd0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login-signup-link:hover {
+  color: #3d2c7a;
+}
