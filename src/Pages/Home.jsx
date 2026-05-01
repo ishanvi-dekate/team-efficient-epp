@@ -21,7 +21,6 @@ function Home({setPage}) {
         <Button text="View Mental State" onClick={() => setPage('Mental')} />
         <Button text="View Profile" onClick={() => setPage('Profile')} />
         <Button text="View Settings" onClick={() => setPage('Settings')} />
-        <Button text="Log out" onClick={() => setPage('LoginPage')} />
       </section>
     </main>
     </>
