@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap');
 
-/* ── ROOT ── full width, no white bars */
+/* ROOT */
 .login-root {
   width: 100%;
   min-height: 100vh;
@@ -12,7 +12,7 @@
   padding: 0;
 }
 
-/* ── HERO (the purple section with planets) ── */
+/* HERO */
 .hero {
   background: #6e5fd0;
   position: relative;
@@ -25,7 +25,6 @@
   padding: 40px 20px;
 }
 
-/* Planet container fills the hero section */
 .planets-wrap {
   position: absolute;
   inset: 0;
@@ -48,7 +47,7 @@
 .planet-6 { bottom: 12%; left: 26%; width: 95px; height: 95px; animation-delay: 1.2s; }
 .planet-7 { bottom: 8%; right: 6%;  width: 110px; height: 110px; animation-delay: 1.8s; }
 
-/* Hero content (text + button) sits above the planets */
+/* Hero content */
 .hero-content {
   text-align: center;
   color: white;
@@ -109,7 +108,7 @@
   transform: scale(0.97);
 }
 
-/* ── FOOTER ── */
+/* FOOTER */
 .hero-footer {
   background: #3a3a3a;
   color: #aaa;
@@ -120,7 +119,7 @@
   width: 100%;
 }
 
-/* ── ANIMATIONS ── */
+/* ANIMATIONS */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   33%      { transform: translateY(-12px) rotate(1.5deg); }

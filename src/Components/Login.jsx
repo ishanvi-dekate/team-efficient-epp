@@ -95,7 +95,7 @@ function Login({ setPage }) {
           className="login-back-btn"
           onClick={() => setPage("LoginPage")}
         >
-          ← Back
+          Back
         </button>
       </section>
     </main>
