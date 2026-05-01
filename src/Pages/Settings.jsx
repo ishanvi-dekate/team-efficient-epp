@@ -1,13 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import './Settings.css';
 
-function Settings({ setPage }) {
+function Settings() {
+  const navigate = useNavigate();
+
   const settingsOptions = [
-    { label: 'Manage Account', target: 'ManageAccount' },
-    { label: 'Notification Emails / Texts', target: 'Notifications' },
-    { label: 'Troubleshooting', target: 'Troubleshooting' },
-    { label: 'Focus Mode', target: 'FocusMode' },
-    { label: 'Personal Information', target: 'PersonalInfo' },
-    { label: 'Danger Zone', target: 'DangerZone', danger: true },
+    { label: 'Manage Account', path: '/settings/account' },
+    { label: 'Notification Emails / Texts', path: '/settings/notifications' },
+    { label: 'Troubleshooting', path: '/settings/troubleshooting' },
+    { label: 'Focus Mode', path: '/settings/focus-mode' },
+    { label: 'Personal Information', path: '/settings/personal-info' },
+    { label: 'Danger Zone', path: '/settings/danger-zone', danger: true },
   ];
 
   return (
@@ -20,12 +23,9 @@ function Settings({ setPage }) {
         <div className="settings-grid">
           {settingsOptions.map((option) => (
             <button
-              key={option.target}
+              key={option.path}
               className={`settings-button ${option.danger ? 'settings-button-danger' : ''}`}
-              onClick={() => {
-                // TODO: hook these up once sub-pages are built
-                console.log(`Navigate to: ${option.target}`);
-              }}
+              onClick={() => navigate(option.path)}
             >
               {option.label}
             </button>
