@@ -8,7 +8,6 @@ function Login({ setPage }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Handle email/password form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -27,7 +26,6 @@ function Login({ setPage }) {
     setPage("Home");
   };
 
-  // Handle Google sign-in
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
@@ -86,10 +84,18 @@ function Login({ setPage }) {
 
         <button
           type="button"
+          className="login-signup-link"
+          onClick={() => setPage("Account")}
+        >
+          Don't have an account? Create one.
+        </button>
+
+        <button
+          type="button"
           className="login-back-btn"
           onClick={() => setPage("LoginPage")}
         >
-          ← Back
+          Back
         </button>
       </section>
     </main>

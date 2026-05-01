@@ -1,18 +1,36 @@
-import { useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 import './Settings.css';
 import Header from '../Components/Header';
 
-function Settings() {
-  const navigate = useNavigate();
+function Settings({ setPage }) {
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setPage('LoginPage');
+    } catch (err) {
+      console.error('Sign out failed:', err);
+    }
+  };
 
   const settingsOptions = [
-    { label: 'Manage Account', path: '/settings/account' },
-    { label: 'Notification Emails / Texts', path: '/settings/notifications' },
-    { label: 'Troubleshooting', path: '/settings/troubleshooting' },
-    { label: 'Focus Mode', path: '/settings/focus-mode' },
-    { label: 'Personal Information', path: '/settings/personal-info' },
-    { label: 'Danger Zone', path: '/settings/danger-zone', danger: true },
+    { label: 'Manage Account', target: 'ManageAccount' },
+    { label: 'Notification Emails / Texts', target: 'Notifications' },
+    { label: 'Troubleshooting', target: 'Troubleshooting' },
+    { label: 'Focus Mode', target: 'FocusMode' },
+    { label: 'Personal Information', target: 'PersonalInfo' },
+    { label: 'Sign Out', target: 'SignOut', signOut: true },
+    { label: 'Danger Zone', target: 'DangerZone', danger: true },
   ];
+
+  const handleClick = (option) => {
+    if (option.signOut) {
+      handleSignOut();
+    } else {
+      // TODO: hook these up once sub-pages are built
+      console.log(`Navigate to: ${option.target}`);
+    }
+  };
 
   return (
     <>
@@ -26,9 +44,9 @@ function Settings() {
         <div className="settings-grid">
           {settingsOptions.map((option) => (
             <button
-              key={option.path}
+              key={option.target}
               className={`settings-button ${option.danger ? 'settings-button-danger' : ''}`}
-              onClick={() => navigate(option.path)}
+              onClick={() => handleClick(option)}
             >
               {option.label}
             </button>

@@ -1,3 +1,7 @@
+.header {
+    display: flex;
+    justify-content: center;
+}
 .header-left {
     background-color: var(--color-10);
 }
