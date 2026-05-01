@@ -8,8 +8,8 @@ const[answer5, setAnswer5] = useState('');
 const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!email.trim() || !password.trim()) {
-      setError("Please enter both email and password.");
+    if (!answer1.trim() || !answer2.trim()||!answer3.trim()||!answer4.trim()||answer5.trim()) {
+      setError("Please fill in all of the blanks.");
       return;
     }
 
