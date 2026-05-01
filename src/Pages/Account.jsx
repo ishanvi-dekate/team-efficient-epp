@@ -25,6 +25,7 @@ function Account(){
         <div className = "account-sign-up">
             <h2>Sign Up</h2>
             <p>Sign up with your email and password</p>
+            <form onSubmit={handleSubmit}>
             <label> Email: </label>
             <input className='email-input'
                 type= "text"
@@ -37,7 +38,9 @@ function Account(){
                 value = {password}
                 onChange = {(event)=> setPassword(event.target.value)}
             />
-            <button className='set account'> Sign up </button>
+            <button type = 'submit' className='set account'> Sign up </button>
+            </form>
+            
 
         </div>
         </>
