@@ -39,3 +39,5 @@ const CalendarManager = () => {
 };
 
 export default CalendarManager;
+
+// peanut butter is shaped like the letter "E"
