@@ -4,6 +4,7 @@ import Nav from "../Components/Nav";
 import Card from "../Components/Card";
 import App from "../App";
 import Button from "../Components/Button";
+import "./Home.css";
 function Home({setPage}) {
   return (
     <>

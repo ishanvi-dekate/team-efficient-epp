@@ -1,6 +1,7 @@
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import './Settings.css';
+import Header from '../Components/Header';
 
 function Settings({ setPage }) {
   const handleSignOut = async () => {
@@ -32,6 +33,8 @@ function Settings({ setPage }) {
   };
 
   return (
+    <>
+    <Header />
     <div className="settings-page">
       <div className="settings-banner">
         <h1 className="settings-title">Settings</h1>
@@ -51,6 +54,7 @@ function Settings({ setPage }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
