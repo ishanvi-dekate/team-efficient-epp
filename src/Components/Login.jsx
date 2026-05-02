@@ -87,7 +87,7 @@ function Login({ setPage }) {
           className="login-signup-link"
           onClick={() => setPage("Account")}
         >
-          Don't have an account? Create one.
+          Don't have an account? Create one
         </button>
 
         <button

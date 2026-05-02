@@ -25,6 +25,21 @@
     width: 100%;
 }
 
+.account-card h1 {
+  margin: 0 0 0.5rem;
+  color: #3d2c7a;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.account-card > p {
+  margin: 1rem 0 2rem;
+  color: #6B7280;
+  text-align: center;
+  font-weight: 400;
+}
+
 .account-form {
     display: flex;
     flex-direction: column;

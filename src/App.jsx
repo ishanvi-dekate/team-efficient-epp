@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "./Components/Header.jsx";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
@@ -10,21 +11,24 @@ import Mental from "./Pages/Mental.jsx";
 function App() {
   const [page, setPage] = useState("LoginPage");
 
-  // Pages that should show the Nav menu (after login)
-  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home" && page !== "Account" && page!=="Info"; 
+  // Header + Nav only show on logged-in pages, not on splash/login/signup
+  const showChrome =
+    page !== "LoginPage" && page !== "Login" && page !== "Account";
 
   return (
     <>
-      {showNav && <Nav setPage={setPage} />}
+      {showChrome && <Header />}
+
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
-      {page === "Mental" && <Mental setPage={setPage}/>} 
-      {showNav && <Nav setPage={setPage} />}
-        </>
-    );
+      {page === "Mental" && <Mental setPage={setPage} />}
+
+      {showChrome && <Nav setPage={setPage} currentPage={page} />}
+    </>
+  );
 }
 
 export default App;
