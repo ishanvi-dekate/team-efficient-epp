@@ -1,4 +1,4 @@
-.account-sign-up{
+.account-page {
     width: 100%;
     min-height: 100vh;
     background: #6e5fd0;
@@ -7,14 +7,90 @@
     justify-content: center;
     padding: 2rem 1rem;
     font-family: 'Nunito', sans-serif;
-    animation: fadeIn 0.4s ease-out;  
-    flex-direction: column;
+    animation: fadeIn 0.4s ease-out;
 }
-.account-sign-up input {
+
+.account-card {
+    background: #FFFFFF;
+    color: #1F2937;
+    border: none;
+    border-radius: 12px;
+    padding: 2rem;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.account-form label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: 500;
+}
+
+.account-form input {
     padding: 0.75rem 1rem;
     border: 2px solid #E5E7EB;
     border-radius: 10px;
     font-family: inherit;
     font-size: 1rem;
     transition: border-color 0.15s;
+    margin-top: 0.5rem;
 }
+
+.account-form input:focus {
+    outline: none;
+    border-color: #6e5fd0;
+}
+
+.account-submit-btn {
+    background: #6e5fd0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-top: 1rem;
+}
+
+.account-submit-btn:hover {
+    background: #5a4bb8;
+}
+
+.account-back-btn {
+    background: transparent;
+    color: #6e5fd0;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    margin-top: 1rem;
+}
+
+.account-back-btn:hover {
+    color: #5a4bb8;
+}
+
+.account-error {
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+  
