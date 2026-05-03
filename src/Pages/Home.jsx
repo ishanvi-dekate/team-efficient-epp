@@ -1,33 +1,34 @@
-import Header from "../Components/Header";
-import Nav from "../Components/Nav";
 import Card from "../Components/Card";
-import App from "../App";
 import Button from "../Components/Button";
 import "./Home.css";
-function Home({setPage}) {
+
+function Home({ setPage }) {
   return (
-    <>
-       <Header />
     <main className="home-page">
       <div className="home-banner">
-        <div className="home-title">Welcome Back!</div>
+        <h2 className="home-title">Welcome Back!</h2>
       </div>
-   
-      <section className="home-card">
-       <Card  children="Stress" title="Stress" className="Stress"/>
-       <Card  children="Time Management + Homework" title="Time Management + Homework" className="Time Management + Homework"/>
-       <Card  children="Sleep" title="Sleep" className="Sleep"/>
+
+      <section className="home-cards">
+        <Card title="Stress" className="home-card">
+          Track your stress levels over time.
+        </Card>
+        <Card title="Time Management + Homework" className="home-card">
+          Stay on top of your assignments.
+        </Card>
+        <Card title="Sleep" className="home-card">
+          Monitor your sleep patterns.
+        </Card>
       </section>
+
       <section className="home-buttons">
-        <Button text="View To-Do list" onClick={() => setPage('To-Do')} className="home-button" />
-        <Button text="View Mental State" onClick={() => setPage('Mental')} className="home-button" />
-        <Button text="View Profile" onClick={() => setPage('Profile')} className="home-button" />
-        <Button text="View Settings" onClick={() => setPage('Settings')} className="home-button" />
+        <Button text="View To-Do list" onClick={() => setPage('Todo')} />
+        <Button text="View Mental State" onClick={() => setPage('Mental')} />
+        <Button text="View Profile" onClick={() => setPage('Profile')} />
+        <Button text="View Settings" onClick={() => setPage('Settings')} />
       </section>
     </main>
-    </>
   );
 }
 
 export default Home;
-
