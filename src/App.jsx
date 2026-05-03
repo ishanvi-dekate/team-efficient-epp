@@ -15,7 +15,6 @@ function App() {
 
   return (
     <>
-      {showNav && <Nav setPage={setPage} />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
