@@ -1,15 +1,14 @@
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import './Settings.css';
-import Header from '../Components/Header';
 
 function Settings({ setPage }) {
-  const handleSignOut = async () => {
+  const handleLogOut = async () => {
     try {
       await signOut(auth);
       setPage('LoginPage');
     } catch (err) {
-      console.error('Sign out failed:', err);
+      console.error('Log out failed:', err);
     }
   };
 
@@ -19,13 +18,13 @@ function Settings({ setPage }) {
     { label: 'Troubleshooting', target: 'Troubleshooting' },
     { label: 'Focus Mode', target: 'FocusMode' },
     { label: 'Personal Information', target: 'PersonalInfo' },
-    { label: 'Sign Out', target: 'SignOut', signOut: true },
+    { label: 'Log Out', target: 'LogOut', logOut: true },
     { label: 'Danger Zone', target: 'DangerZone', danger: true },
   ];
 
   const handleClick = (option) => {
-    if (option.signOut) {
-      handleSignOut();
+    if (option.logOut) {
+      handleLogOut();
     } else {
       // TODO: hook these up once sub-pages are built
       console.log(`Navigate to: ${option.target}`);
@@ -33,8 +32,6 @@ function Settings({ setPage }) {
   };
 
   return (
-    <>
-    <Header />
     <div className="settings-page">
       <div className="settings-banner">
         <h1 className="settings-title">Settings</h1>
@@ -54,7 +51,6 @@ function Settings({ setPage }) {
         </div>
       </div>
     </div>
-    </>
   );
 }
 

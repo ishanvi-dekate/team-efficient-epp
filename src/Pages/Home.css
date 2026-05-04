@@ -1,51 +1,75 @@
-.home-buttons {
-    background: #A5BDF4;
-    color: #1F2937;
-    border: none;
-    border-radius: 999px;
-    padding: 1rem 2rem;
-    font-family: 'Quicksand', system-ui, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  }
 .home-page {
-    width: 100%;
-    min-height: 100%;
-    background: #FFFFFF;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Light blue banner */
+.home-banner {
+  background: #A5BDF4;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-title {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* Cards section */
+.home-cards {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.home-card {
+  background: #A5BDF4;
+  color: #1F2937;
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.home-buttons {
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .home-cards {
+    grid-template-columns: 1fr;
   }
-  .home-button:hover {
-    background: #8FA8E8;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+
+  .home-title {
+    font-size: 1.5rem;
   }
-  
-  .home-button:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  }
-  
-  .home-button:focus-visible {
-    outline: 2px solid #7C6FE8;
-    outline-offset: 2px;
-  }
-  .home-card {
-    background: #A5BDF4;
-    color: #1F2937;
-    border: none;
-    border-radius: 9999999px;
-    padding: 1rem 2rem;
-    font-family: 'Quicksand', system-ui, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  }
-  
+}
