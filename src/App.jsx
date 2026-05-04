@@ -23,6 +23,7 @@ function App() {
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
+      {page == "Info" && <Info setPage= {setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
       {page === "Mental" && <Mental setPage={setPage} />}
