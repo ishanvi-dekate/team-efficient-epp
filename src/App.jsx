@@ -67,6 +67,7 @@ function App() {
       {page === "Account"   && <Account   setPage={navigateTo} />}
       {page === "Home"      && <Home      setPage={navigateTo} />}
       {page === "Settings"  && <Settings  setPage={navigateTo} />}
+      {page === "Mental"  && <Mental setPage= {navigateTo} />}
       {page === "Todo"      && <Tracker   setPage={navigateTo} user={user} />}
       {showNav && <Nav setPage={navigateTo} />}
     </>
