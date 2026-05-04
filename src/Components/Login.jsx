@@ -1,42 +1,12 @@
 import { useState } from "react";
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+import "./Login.css";
 
-function Login({ onLogin }) {
+function Login({ setPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
-  const [messages, setMessages] = useState([]);
-
- 
-
-  const fetchMessages = async () => {
-    const snapshot = await getDocs(collection(db, 'messages')); // Get all documents
-    const list = snapshot.docs.map(doc => doc.data()); // Convert docs to plain JS objects
-    setMessages(list); // Update the messages state
-  };
-
-  // Add a new message to Firestore
-  const sendMessage = async () => {
-    if (!input.trim()) return; // Don't send empty messages
-
-    // Add a new message with the user's name and current timestamp
-    await addDoc(collection(db, 'messages'), {
-      text: input,
-      name: user.displayName,
-      timestamp: Date.now()
-    });
-
-    setInput(''); // Clear the input field
-    fetchMessages(); // Refresh the message list after sending
-  };
-
-  // Re-fetch messages any time the user logs in
-  useEffect(() => {
-    if (user) {
-      fetchMessages();
-    }
-  }, [user]);
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,20 +22,41 @@ function Login({ onLogin }) {
     }
 
     setError("");
-    onLogin?.();}
+    // TODO: actually authenticate with Firebase here
+    setPage("Home");
+  };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      setPage("Home");
+    } catch (err) {
+      setError("Google sign-in failed. Please try again.");
+      console.error(err);
+    }
+  };
 
   return (
-    <>
-    <></>
-    <main className="login-page">
+    <main className="login-page-form">
       <section className="login-card">
         <h1>Login</h1>
         <p>Sign in to continue using efficient.epp.</p>
 
         {error && <p className="login-error">{error}</p>}
 
-        <form onSubmit={handleSubmit}>
+        <button
+          type="button"
+          className="google-login-btn"
+          onClick={handleGoogleLogin}
+        >
+          Sign in with Google
+        </button>
+
+        <div className="login-divider">
+          <span>or</span>
+        </div>
+
+        <form onSubmit={handleSubmit} className="login-form">
           <label>
             Email
             <input
@@ -85,11 +76,30 @@ function Login({ onLogin }) {
               placeholder="Enter your password"
             />
           </label>
-          
+
+          <button type="submit" className="login-submit-btn">
+            Log In
+          </button>
         </form>
+
+        <button
+          type="button"
+          className="login-signup-link"
+          onClick={() => setPage("Account")}
+        >
+          Don't have an account? Create one
+        </button>
+
+        <button
+          type="button"
+          className="login-back-btn"
+          onClick={() => setPage("LoginPage")}
+        >
+          Back
+        </button>
       </section>
     </main>
-    </>
   );
-};
-export default Login
+}
+
+export default Login;

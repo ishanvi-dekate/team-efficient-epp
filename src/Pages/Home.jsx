@@ -1,26 +1,34 @@
-import Header from "../Components/Header";
-import { useState } from "react";
-import Nav from "../Components/Nav";
 import Card from "../Components/Card";
-import App from "../App";
-function Home() {
+import Button from "../Components/Button";
+import "./Home.css";
+
+function Home({ setPage }) {
   return (
-    <>
-    <header><Header /></header>
     <main className="home-page">
-      <Header />
-      <section className="home-card">
-       <h2>Welcome Back   !</h2>
-       <Card  children=" " title="Stress" className="Stress"/>
-       <Card  children=" " title="Time Management + Homework" className="Time Management + Homework"/>
-       <Card  children=" " title="Sleep" className="Sleep"/>
+      <div className="home-banner">
+        <h2 className="home-title">Welcome Back!</h2>
+      </div>
+
+      <section className="home-cards">
+        <Card title="Stress" className="home-card">
+          Track your stress levels over time.
+        </Card>
+        <Card title="Time Management + Homework" className="home-card">
+          Stay on top of your assignments.
+        </Card>
+        <Card title="Sleep" className="home-card">
+          Monitor your sleep patterns.
+        </Card>
       </section>
+
       <section className="home-buttons">
+        <Button text="View To-Do list" onClick={() => setPage('Todo')} />
+        <Button text="View Mental State" onClick={() => setPage('Mental')} />
+        <Button text="View Profile" onClick={() => setPage('Profile')} />
+        <Button text="View Settings" onClick={() => setPage('Settings')} />
       </section>
     </main>
-    </>
   );
 }
 
 export default Home;
-

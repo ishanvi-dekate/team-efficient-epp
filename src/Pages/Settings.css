@@ -1,7 +1,6 @@
-/* Initial Settings Styles */
 .settings-page {
   width: 100%;
-  min-height: 100%;
+  flex: 1;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -19,23 +18,20 @@
 .settings-title {
   margin: 0;
   color: #FFFFFF;
-  font-family: 'Quicksand', system-ui, sans-serif;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 1px;
 }
 
-/* Main content area */
 .settings-content {
   flex: 1;
   padding: 3rem 2rem;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 
-/* Two-column grid of buttons, flowing column-by-column like the prototype:
-   col 1: Manage Account, Troubleshooting, Personal Info, Danger Zone
-   col 2: Notifications, Focus Mode */
 .settings-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,14 +42,13 @@
   max-width: 900px;
 }
 
-/* Pill-shaped buttons */
 .settings-button {
   background: #A5BDF4;
   color: #1F2937;
   border: none;
   border-radius: 999px;
   padding: 1rem 2rem;
-  font-family: 'Quicksand', system-ui, sans-serif;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 500;
   text-align: left;
@@ -64,7 +59,6 @@
 
 .settings-button:hover {
   background: #8FA8E8;
-  transform: translateY(-1px);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
@@ -87,7 +81,6 @@
   background: #E88F8F;
 }
 
-/* Stack to one column on narrow screens */
 @media (max-width: 640px) {
   .settings-grid {
     grid-template-columns: 1fr;

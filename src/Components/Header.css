@@ -1,21 +1,39 @@
-.header-left {
-    background-color: var(--color-10);
+.app-header {
+  width: 100%;
+  background: #7364D2;
+  padding: 1.25rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.header-brand {
-    color: #FFF;
-    justify-content:center;
-    font-size: 24;
-    font-family: "etna", sans-serif;
-}
-.header-logo{
-    border-color: lightblue;
-    border-width: 2px;
-}
-.header-right{
-    background-color: var(--color-3);
 
+.app-header-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  font-family: 'Quicksand', 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
 }
-.header-avatar{
-    border-color: azure;
-    border-radius: 2px;
+
+.app-header-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.app-header-tag {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .app-header-name {
+    font-size: 1.3rem;
+  }
+  .app-header-tag {
+    font-size: 0.95rem;
+  }
 }
