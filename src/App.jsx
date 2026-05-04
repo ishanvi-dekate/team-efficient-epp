@@ -7,6 +7,8 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
+import Mental from "./Pages/Mental.jsx";
+import Info from "./Pages/Info.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <>
+      <Header />
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
