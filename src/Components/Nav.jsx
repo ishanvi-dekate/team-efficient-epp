@@ -3,7 +3,7 @@ import './Nav.css';
 function Nav({ setPage, currentPage }) {
   const navItems = [
     { label: 'Home', target: 'Home' },
-    { label: 'To-Do', target: 'Todo' },
+    { label: 'Tracker', target: 'Todo' },
     { label: 'Mental State', target: 'Mental' },
     { label: 'Settings', target: 'Settings' },
     { label: 'Profile', target: 'Profile' },

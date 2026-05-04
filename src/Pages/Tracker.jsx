@@ -3,7 +3,7 @@ import TodoList from '../Components/Todo';
 import CalendarManager from '../Components/Calander';
 import './Tracker.css';
 
-function Tracker({ setPage }) {
+function Tracker({ setPage, user }) {
   return (
     <div className="tracker-page">
       <div className="tracker-banner">
@@ -11,7 +11,7 @@ function Tracker({ setPage }) {
       </div>
       <div className="tracker-content">
         <CalendarManager />
-        <TodoList />
+        <TodoList user={user} />
       </div>
       <Nav setPage={setPage} />
     </div>
