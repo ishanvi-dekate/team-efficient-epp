@@ -1,5 +1,4 @@
 import Header from "../Components/Header";
-import { useState } from "react";
 import Nav from "../Components/Nav";
 import Card from "../Components/Card";
 import App from "../App";
@@ -16,7 +15,7 @@ function Home({setPage}) {
        <Card  children="Sleep" title="Sleep" className="Sleep"/>
       </section>
       <section className="home-buttons">
-        <Button text="View To-Do list" onClick={() => setPage('To-Do')} />
+        <Button text="View To-Do list" onClick={() => setPage('Todo')} />
         <Button text="View Mental State" onClick={() => setPage('Mental')} />
         <Button text="View Profile" onClick={() => setPage('Profile')} />
         <Button text="View Settings" onClick={() => setPage('Settings')} />

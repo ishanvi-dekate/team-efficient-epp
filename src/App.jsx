@@ -1,26 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase.js";
 import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
 import Settings from "./Pages/Settings.jsx";
+import Tracker from "./Pages/Tracker.jsx";
 
 function App() {
   const [page, setPage] = useState("LoginPage");
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Restore session: only redirect to Home if currently on a login screen
+        setPage(prev =>
+          prev === "LoginPage" || prev === "Login" ? "Home" : prev
+        );
+      } else {
+        setPage("LoginPage");
+      }
+      setAuthLoading(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  // Hold render until Firebase has checked localStorage for an existing session
+  if (authLoading) return null;
 
   // Pages that should show the Nav menu (after login)
-  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home"; 
+  // "Todo" is excluded because Tracker.jsx includes Nav directly
+  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home" && page !== "Todo";
 
-    return (
-        <>
-      
+  return (
+    <>
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
+      {page === "Todo" && <Tracker setPage={setPage} />}
       {showNav && <Nav setPage={setPage} />}
-        </>
-    );
+    </>
+  );
 }
 
 export default App;

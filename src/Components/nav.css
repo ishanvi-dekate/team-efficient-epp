@@ -1,6 +1,6 @@
 .navibar {
-    display:flexbox;
-    padding: 1rem0;
+    display: flex;
+    padding: 1rem 0;
 }
 .nav {
     display:flex;
@@ -11,6 +11,7 @@
     margin:0;
     padding:0;
     flex-wrap:wrap;
+    width: 100%;
 }
 li {
     color: white;
