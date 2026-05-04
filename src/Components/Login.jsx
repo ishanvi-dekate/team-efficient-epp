@@ -1,14 +1,34 @@
 import { useState } from "react";
 import { auth, provider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
 
 function Login({ setPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  const actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be in the authorized domains list in the Firebase Console.
+  url: 'https://www.example.com/finishSignUp?cartId=1234',
+  // This must be true.
+  handleCodeInApp: true,
+  iOS: {
+    bundleId: 'com.example.ios'
+  },
+  android: {
+    packageName: 'com.example.android',
+    installApp: true,
+    minimumVersion: '12'
+  },
+  // The domain must be configured in Firebase Hosting and owned by the project.
+  linkDomain: 'custom-domain.com'
+};
 
-  const handleSubmit = (event) => {
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -16,14 +36,20 @@ function Login({ setPage }) {
       return;
     }
 
-    if (!email.includes("@")) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
     setError("");
-    // TODO: actually authenticate with Firebase here
-    setPage("Home");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setPage("Home");
+    } catch (err) {
+      if (err.code === "auth/invalid-credential" || err.code === "auth/wrong-password" || err.code === "auth/user-not-found") {
+        setError("Incorrect email or password.");
+      } else if (err.code === "auth/too-many-requests") {
+        setError("Too many attempts. Please try again later.");
+      } else {
+        setError("Sign-in failed. Please try again.");
+      }
+      console.error(err);
+    }
   };
 
   const handleGoogleLogin = async () => {
