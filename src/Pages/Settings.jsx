@@ -1,14 +1,35 @@
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 import './Settings.css';
 
 function Settings({ setPage }) {
+  const handleLogOut = async () => {
+    try {
+      await signOut(auth);
+      setPage('LoginPage');
+    } catch (err) {
+      console.error('Log out failed:', err);
+    }
+  };
+
   const settingsOptions = [
     { label: 'Manage Account', target: 'ManageAccount' },
     { label: 'Notification Emails / Texts', target: 'Notifications' },
     { label: 'Troubleshooting', target: 'Troubleshooting' },
     { label: 'Focus Mode', target: 'FocusMode' },
     { label: 'Personal Information', target: 'PersonalInfo' },
+    { label: 'Log Out', target: 'LogOut', logOut: true },
     { label: 'Danger Zone', target: 'DangerZone', danger: true },
   ];
+
+  const handleClick = (option) => {
+    if (option.logOut) {
+      handleLogOut();
+    } else {
+      // TODO: hook these up once sub-pages are built
+      console.log(`Navigate to: ${option.target}`);
+    }
+  };
 
   return (
     <div className="settings-page">
@@ -22,10 +43,7 @@ function Settings({ setPage }) {
             <button
               key={option.target}
               className={`settings-button ${option.danger ? 'settings-button-danger' : ''}`}
-              onClick={() => {
-                // TODO: hook these up once sub-pages are built
-                console.log(`Navigate to: ${option.target}`);
-              }}
+              onClick={() => handleClick(option)}
             >
               {option.label}
             </button>

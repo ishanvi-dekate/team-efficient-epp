@@ -5,6 +5,7 @@ import Nav from "./Components/Nav.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
+import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
@@ -15,7 +16,6 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Restore session: only redirect to Home if currently on a login screen
         setPage(prev =>
           prev === "LoginPage" || prev === "Login" ? "Home" : prev
         );
@@ -27,7 +27,6 @@ function App() {
     return unsubscribe;
   }, []);
 
-  // Hold render until Firebase has checked localStorage for an existing session
   if (authLoading) return null;
 
   // Pages that should show the Nav menu (after login)
@@ -38,6 +37,7 @@ function App() {
     <>
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
+      {page === "Account" && <Account setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
       {page === "Todo" && <Tracker setPage={setPage} />}
