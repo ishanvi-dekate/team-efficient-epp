@@ -8,6 +8,7 @@ import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Mental from "./Pages/Mental.jsx";
+import Profile from "./Pages/Profile.jsx";
 import Info from "./Pages/Info.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
@@ -43,6 +44,10 @@ function App() {
       {page === "Account" && <Account setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
+      {page === "Mental" && <Mental setPage={setPage} />}
+      {page ==="Profile" && <Profile setPage={setPage} />}
+
+      {showChrome && <Nav setPage={setPage} currentPage={page} />}
       {page === "Todo" && <Tracker setPage={setPage} />}
       {showNav && <Nav setPage={setPage} />}
     </>
