@@ -1,0 +1,104 @@
+.todo-list {
+  background: #fff;
+  color: #1F2937;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Override global h2 { color: white } */
+.todo-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #1F2937;
+}
+
+.todo-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #1F2937;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.todo-input:focus {
+  border-color: #4a6cf7;
+}
+
+.todo-add-btn {
+  padding: 0.45rem 1rem;
+  background: #4a6cf7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.todo-add-btn:hover {
+  background: #3a5ce5;
+}
+
+.todo-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo-empty {
+  color: #aaa;
+  font-size: 0.88rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.todo-item-done .todo-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #1F2937;
+}
+
+.todo-delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  transition: color 0.15s;
+}
+
+.todo-delete-btn:hover {
+  color: #e55;
+}
