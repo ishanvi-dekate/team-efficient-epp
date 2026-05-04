@@ -10,23 +10,49 @@ import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
+const LOGIN_PAGES = ["LoginPage", "Login"];
+
+// Cookies survive hard refresh (Ctrl+Shift+R); sessionStorage does not
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : null;
+};
+const setCookie = (name, value) => {
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${30 * 86400}; SameSite=Strict`;
+};
+const deleteCookie = (name) => {
+  document.cookie = `${name}=; path=/; max-age=0`;
+};
+
 function App() {
   const [page, setPage] = useState("LoginPage");
+  const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setPage(prev =>
-          prev === "LoginPage" || prev === "Login" ? "Home" : prev
-        );
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+      if (firebaseUser) {
+        const saved = getCookie("page");
+        setPage(saved && !LOGIN_PAGES.includes(saved) ? saved : "Home");
       } else {
+        deleteCookie("page");
         setPage("LoginPage");
       }
       setAuthLoading(false);
     });
     return unsubscribe;
   }, []);
+
+  const navigateTo = (newPage) => {
+    if (LOGIN_PAGES.includes(newPage)) {
+      signOut(auth).catch(console.error);
+      deleteCookie("page");
+    } else {
+      setCookie("page", newPage);
+    }
+    setPage(newPage);
+  };
 
   if (authLoading) return null;
 
@@ -41,6 +67,10 @@ const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
       {page === "Account" && <Account setPage={setPage} />}
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
+      {page === "Mental" && <Mental setPage={setPage} />}
+      {page ==="Profile" && <Profile setPage={setPage} />}
+
+      {showChrome && <Nav setPage={setPage} currentPage={page} />}
       {page === "Todo" && <Tracker setPage={setPage} />}
       {showNav && <Nav setPage={setPage} />}
     </>
