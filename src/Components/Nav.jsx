@@ -12,7 +12,6 @@ function Nav({ setPage }) {
           <li onClick={() => setPage("Mental")}>Mental Health</li>
           <li onClick={() => setPage("Profile")}>Profile</li>
           <li onClick={() => setPage("Settings")}>Settings</li>
-          <li onClick={() => setPage("LoginPage")}>Sign-Out</li>
         </ul>
       </div>
       </footer>

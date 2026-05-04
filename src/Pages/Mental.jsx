@@ -1,0 +1,82 @@
+import { useState } from "react";
+import "./Mental.css";
+
+function Mental() {
+  const [sleepTime, setSleepTime] = useState("");
+  const [dayScale, setDayScale] = useState("");
+  const [wakeTime, setWakeTime] = useState("");
+  const [worries, setWorries] = useState("");
+
+  const handleSubmit = () => {
+    // TODO: save to Firestore
+    console.log({ sleepTime, dayScale, wakeTime, worries });
+    alert("Submitted! (saving to database coming soon)");
+  };
+
+  return (
+    <div className="mental-page">
+      <div className="mental-banner">
+        <h1 className="mental-title">Mental Check</h1>
+      </div>
+
+      <div className="mental-content">
+        <p className="mental-subtitle">Please fill out</p>
+
+        <div className="mental-grid">
+          {/* Left column: questions 1 and 2 */}
+          <div className="mental-column">
+            <div className="mental-question">
+              <label className="mental-card">What time did you sleep yesterday?</label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value={sleepTime}
+                onChange={(e) => setSleepTime(e.target.value)}
+              />
+            </div>
+
+            <div className="mental-question">
+              <label className="mental-card">When did you wake up?</label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value={wakeTime}
+                onChange={(e) => setWakeTime(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Center submit button */}
+          <button className="mental-submit" onClick={handleSubmit}>
+            Click to<br />upload it!
+          </button>
+
+          {/* Right column: questions 3 and 4 */}
+          <div className="mental-column">
+            <div className="mental-question">
+              <label className="mental-card">On a scale from 1-10, how was your day?</label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value={dayScale}
+                onChange={(e) => setDayScale(e.target.value)}
+              />
+            </div>
+
+            <div className="mental-question">
+              <label className="mental-card">List out your worries/concerns</label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value={worries}
+                onChange={(e) => setWorries(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Mental;
