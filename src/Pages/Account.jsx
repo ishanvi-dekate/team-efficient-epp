@@ -36,7 +36,7 @@ function Account({ setPage }) {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      setPage('Home');
+      setPage('Info');
     } catch (err) {
       // Firebase gives detailed error codes; show a friendly message
       if (err.code === 'auth/email-already-in-use') {
