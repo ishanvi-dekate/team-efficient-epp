@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
 import Nav from "./Components/Nav.jsx";
+import Header from "./Components/Header.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
@@ -31,10 +32,10 @@ function App() {
 
   // Pages that should show the Nav menu (after login)
   // "Todo" is excluded because Tracker.jsx includes Nav directly
-  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Home" && page !== "Todo";
-
+const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
   return (
     <>
+      {showNav && <Header />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
