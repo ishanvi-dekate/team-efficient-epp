@@ -1,17 +1,54 @@
-.navibar {
-    display:flexbox;
-    padding: 1rem0;}
-.nav {
-        display:flex;
-        justify-content: center;
-        background-color: #1e1b4b;
-        list-style-type:none;
-        gap: 2rem;
-        margin:0;
-        padding:0;
-        flex-wrap:wrap;}
-li {
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            transition:0.3s ease;}
+.app-nav {
+    width: 100%;
+    background: #1E1B4B;
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .app-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .app-nav-item {
+    color: #A78BFA;
+    font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: color 0.15s ease, transform 0.15s ease;
+    text-align: center;
+  }
+  
+  .app-nav-item:hover {
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+  
+  .app-nav-item.active {
+    color: #FFFFFF;
+    position: relative;
+  }
+  
+  .app-nav-item.active::after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    margin: 4px auto 0;
+  }
+  
+  @media (max-width: 640px) {
+    .app-nav-item {
+      font-size: 0.85rem;
+      padding: 0.5rem 0.25rem;
+    }
+  }
