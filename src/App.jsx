@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
 import Nav from "./Components/Nav.jsx";
+import Header from "./Components/Header.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
-import Mental from "./Pages/Mental.jsx";
-import Profile from "./Pages/Profile.jsx";
-import Info from "./Pages/Info.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
@@ -58,12 +56,12 @@ function App() {
 
   if (authLoading) return null;
 
-  // "Todo" excluded because Tracker.jsx renders Nav directly
-  const showNav = !LOGIN_PAGES.includes(page) && page !== "Home" && page !== "Todo";
-
+  // Pages that should show the Nav menu (after login)
+  // "Todo" is excluded because Tracker.jsx includes Nav directly
+const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
   return (
     <>
-      <Header />
+      {showNav && <Header />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
