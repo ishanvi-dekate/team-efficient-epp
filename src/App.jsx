@@ -7,6 +7,7 @@ import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Mental from "./Pages/Mental.jsx";
+import Profile from "./Pages/Profile.jsx";
 
 function App() {
   const [page, setPage] = useState("LoginPage");
@@ -23,6 +24,7 @@ function App() {
       {page === "Home" && <Home setPage={setPage} />}
       {page === "Settings" && <Settings setPage={setPage} />}
       {page === "Mental" && <Mental setPage={setPage} />}
+      {page ==="Profile" && <Profile setPage={setPage} />}
 
       {showChrome && <Nav setPage={setPage} currentPage={page} />}
     </>
