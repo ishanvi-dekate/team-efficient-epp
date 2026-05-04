@@ -17,8 +17,6 @@ function App() {
 
   return (
     <>
-      {showChrome && <Header />}
-
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
