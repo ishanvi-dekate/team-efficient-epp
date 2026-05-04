@@ -9,7 +9,6 @@ import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
-import Info from "./Pages/Info.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
@@ -63,18 +62,15 @@ function App() {
 
   return (
     <>
-      <Header />
-      {page === "LoginPage" && <LoginPage setPage={setPage} />}
-      {page === "Login" && <Login setPage={setPage} />}
-      {page === "Account" && <Account setPage={setPage} />}
-      {page === "Home" && <Home setPage={setPage} />}
-      {page === "Settings" && <Settings setPage={setPage} />}
-      {page === "Mental" && <Mental setPage={setPage} />}
-      {page ==="Profile" && <Profile setPage={setPage} />}
-
-      {showChrome && <Nav setPage={setPage} currentPage={page} />}
-      {page === "Todo" && <Tracker setPage={setPage} />}
-      {showNav && <Nav setPage={setPage} />}
+      {page === "LoginPage" && <LoginPage setPage={navigateTo} />}
+      {page === "Login"     && <Login     setPage={navigateTo} />}
+      {page === "Account"   && <Account   setPage={navigateTo} />}
+      {page === "Home"      && <Home      setPage={navigateTo} />}
+      {page === "Settings"  && <Settings  setPage={navigateTo} />}
+      {page === "Mental"    && <Mental    setPage={navigateTo} />}
+      {page === "Profile"   && <Profile   setPage={navigateTo} />}
+      {page === "Todo"      && <Tracker   setPage={navigateTo} user={user} />}
+      {showNav && <Nav setPage={navigateTo} currentPage={page} />}
     </>
   );
 }
