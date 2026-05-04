@@ -6,7 +6,7 @@ function Nav({ setPage }) {
   return (
     <footer>
       <div className='navibar'>
-        <ul className = 'nav'>
+        <ul className ='nav'>
           <li onClick={() => setPage("Home")}>Home</li>
           <li onClick={() => setPage("Todo")}>To-Do</li>
           <li onClick={() => setPage("Mental")}>Mental Health</li>
