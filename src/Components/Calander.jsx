@@ -1,39 +1,63 @@
-import React, { useState } from 'react';
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import { useState } from 'react';
+import './Calander.css';
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+const DAY_HEADERS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const CalendarManager = () => {
-  const [events, setEvents] = useState([]);
+  const today = new Date();
+  const [current, setCurrent] = useState(
+    new Date(today.getFullYear(), today.getMonth(), 1)
+  );
+  const [selected, setSelected] = useState(null);
 
-  // This handles the user login and permission request
-  const login = useGoogleLogin({
-    onSuccess: tokenResponse => fetchCalendarData(tokenResponse.access_token),
-    scope: 'https://www.googleapis.com/auth/calendar', // Permission to view/edit
-  });
+  const year = current.getFullYear();
+  const month = current.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
 
-  const fetchCalendarData = async (accessToken) => {
-    try {
-      const response = await axios.get(
-        'https://www.googleapis.com/calendar/v3/calendars/primary/events',
-        {
-          headers: { Authorization: `Bearer ${accessToken}` }
-        }
-      );
-      setEvents(response.data.items);
-    } catch (error) {
-      console.error("Error fetching calendar:", error);
-    }
-  };
+  const prevMonth = () => setCurrent(new Date(year, month - 1, 1));
+  const nextMonth = () => setCurrent(new Date(year, month + 1, 1));
+
+  const isToday = (day) =>
+    day === today.getDate() &&
+    month === today.getMonth() &&
+    year === today.getFullYear();
+
+  const cells = [
+    ...Array(firstDay).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ];
 
   return (
-    <div>
-      <h1>My Google Calendar</h1>
-      <button onClick={() => login()}>Login with Google</button>
-      <ul>
-        {events.map(event => (
-          <li key={event.id}>{event.summary}</li>
+    <div className="calendar">
+      <div className="calendar-header">
+        <button className="calendar-nav" onClick={prevMonth}>&lt;</button>
+        <h2 className="calendar-title">{MONTH_NAMES[month]} {year}</h2>
+        <button className="calendar-nav" onClick={nextMonth}>&gt;</button>
+      </div>
+      <div className="calendar-grid">
+        {DAY_HEADERS.map(d => (
+          <div key={d} className="calendar-day-header">{d}</div>
         ))}
-      </ul>
+        {cells.map((day, i) => (
+          <div
+            key={i}
+            className={[
+              'calendar-cell',
+              day ? 'calendar-cell-active' : '',
+              isToday(day) ? 'calendar-cell-today' : '',
+              day && selected === `${year}-${month}-${day}` ? 'calendar-cell-selected' : '',
+            ].join(' ')}
+            onClick={() => day && setSelected(`${year}-${month}-${day}`)}
+          >
+            {day ?? ''}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
