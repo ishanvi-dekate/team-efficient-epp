@@ -9,6 +9,8 @@ import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
 import Tracker from "./Pages/Tracker.jsx";
+import Mental from "./Pages/Mental.jsx";
+import Profile from "./Pages/Profile.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -70,9 +72,8 @@ const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
       {page === "Mental" && <Mental setPage={setPage} />}
       {page ==="Profile" && <Profile setPage={setPage} />}
 
-      {showChrome && <Nav setPage={setPage} currentPage={page} />}
       {page === "Todo" && <Tracker setPage={setPage} />}
-      {showNav && <Nav setPage={setPage} />}
+      {showNav && <Nav setPage={setPage} currentPage={page} />}
     </>
   );
 }
