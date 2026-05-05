@@ -11,6 +11,7 @@ import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
 import Info from "./Pages/Info.jsx";
 import Tracker from "./Pages/Tracker.jsx";
+import Header from "./Components/Header.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -64,17 +65,17 @@ function App() {
   return (
     <>
       <Header />
-      {page === "LoginPage" && <LoginPage setPage={setPage} />}
-      {page === "Login" && <Login setPage={setPage} />}
-      {page === "Account" && <Account setPage={setPage} />}
-      {page === "Home" && <Home setPage={setPage} />}
-      {page === "Settings" && <Settings setPage={setPage} />}
-      {page === "Mental" && <Mental setPage={setPage} />}
-      {page ==="Profile" && <Profile setPage={setPage} />}
+      {page === "LoginPage" && <LoginPage setPage={navigateTo} />}
+      {page === "Login" && <Login setPage={navigateTo} />}
+      {page === "Account" && <Account setPage={navigateTo} />}
+      {page === "Home" && <Home setPage={navigateTo} />}
+      {page === "Settings" && <Settings setPage={navigateTo} />}
+      {page === "Mental" && <Mental setPage={navigateTo} />}
+      {page ==="Profile" && <Profile setPage={navigateTo} />}
 
-      {showChrome && <Nav setPage={setPage} currentPage={page} />}
-      {page === "Todo" && <Tracker setPage={setPage} />}
-      {showNav && <Nav setPage={setPage} />}
+      {showChrome && <Nav setPage={navigateTo} currentPage={page} />}
+      {page === "Todo" && <Tracker setPage={navigateTo} />}
+      {showNav && <Nav setPage={navigateTo} />}
     </>
   );
 }
