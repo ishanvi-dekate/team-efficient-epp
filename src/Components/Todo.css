@@ -4,8 +4,15 @@
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 400px;
+  max-width: 420px;
   width: 100%;
+}
+
+.todo-date-label {
+  font-size: 0.8rem;
+  color: #4a6cf7;
+  font-weight: 600;
+  margin: -0.25rem 0 0.75rem;
 }
 
 /* Override global h2 { color: white } */
@@ -18,8 +25,25 @@
 
 .todo-input-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.todo-time-input {
+  padding: 0.45rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #1F2937;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.todo-time-input:focus {
+  border-color: #4a6cf7;
 }
 
 .todo-input {
@@ -28,7 +52,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 0.9rem;
-  color: #1F2937;
+  color: #ffffff;
   outline: none;
   transition: border-color 0.15s;
 }
@@ -87,6 +111,16 @@
   flex: 1;
   font-size: 0.9rem;
   color: #1F2937;
+}
+
+.todo-due-time {
+  font-size: 0.75rem;
+  color: #4a6cf7;
+  font-weight: 600;
+  background: #eef1ff;
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
 }
 
 .todo-delete-btn {

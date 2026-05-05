@@ -7,12 +7,21 @@ const MONTH_NAMES = [
 ];
 const DAY_HEADERS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const CalendarManager = () => {
+function formatDate(year, month, day) {
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+const CalendarManager = ({ selectedDate, onSelectDate }) => {
   const today = new Date();
-  const [current, setCurrent] = useState(
-    new Date(today.getFullYear(), today.getMonth(), 1)
-  );
-  const [selected, setSelected] = useState(null);
+  const todayStr = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const [current, setCurrent] = useState(() => {
+    if (selectedDate) {
+      const [y, m] = selectedDate.split('-').map(Number);
+      return new Date(y, m - 1, 1);
+    }
+    return new Date(today.getFullYear(), today.getMonth(), 1);
+  });
 
   const year = current.getFullYear();
   const month = current.getMonth();
@@ -21,11 +30,6 @@ const CalendarManager = () => {
 
   const prevMonth = () => setCurrent(new Date(year, month - 1, 1));
   const nextMonth = () => setCurrent(new Date(year, month + 1, 1));
-
-  const isToday = (day) =>
-    day === today.getDate() &&
-    month === today.getMonth() &&
-    year === today.getFullYear();
 
   const cells = [
     ...Array(firstDay).fill(null),
@@ -43,25 +47,26 @@ const CalendarManager = () => {
         {DAY_HEADERS.map(d => (
           <div key={d} className="calendar-day-header">{d}</div>
         ))}
-        {cells.map((day, i) => (
-          <div
-            key={i}
-            className={[
-              'calendar-cell',
-              day ? 'calendar-cell-active' : '',
-              isToday(day) ? 'calendar-cell-today' : '',
-              day && selected === `${year}-${month}-${day}` ? 'calendar-cell-selected' : '',
-            ].join(' ')}
-            onClick={() => day && setSelected(`${year}-${month}-${day}`)}
-          >
-            {day ?? ''}
-          </div>
-        ))}
+        {cells.map((day, i) => {
+          const dateStr = day ? formatDate(year, month, day) : null;
+          return (
+            <div
+              key={i}
+              className={[
+                'calendar-cell',
+                day ? 'calendar-cell-active' : '',
+                dateStr === todayStr ? 'calendar-cell-today' : '',
+                dateStr === selectedDate ? 'calendar-cell-selected' : '',
+              ].join(' ')}
+              onClick={() => day && onSelectDate(dateStr)}
+            >
+              {day ?? ''}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export default CalendarManager;
-
-// peanut butter is shaped like the letter "E"
