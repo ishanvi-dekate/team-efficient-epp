@@ -1,5 +1,6 @@
 import Card from "../Components/Card";
 import Button from "../Components/Button";
+import SearchBar from "../Components/SearchBar";
 import "./Home.css";
 import Header from "../Components/Header";
 
@@ -11,6 +12,7 @@ function Home({ setPage, user }) {
     <main className="home-page">
       <div className="home-banner">
         <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
+        <SearchBar user={user} setPage={setPage} />
       </div>
 
       <section className="home-cards">

@@ -11,6 +11,7 @@ import Settings from "./Pages/Settings.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
+import ChatBot from "./Components/ChatBot.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -74,6 +75,7 @@ const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account" &
 
       {page === "Todo" && <Tracker setPage={setPage} user={user} />}
       {showNav && <Nav setPage={setPage} currentPage={page} />}
+      <ChatBot user={user} />
     </>
   );
 }

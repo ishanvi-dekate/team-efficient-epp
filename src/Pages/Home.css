@@ -9,10 +9,11 @@
 /* Light blue banner */
 .home-banner {
   background: #A5BDF4;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 2rem 1.75rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 0.75rem;
 }
 
 .home-title {
