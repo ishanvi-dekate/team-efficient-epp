@@ -22,7 +22,6 @@ function Tracker({ setPage, user }) {
         <TodoList user={user} selectedDate={selectedDate} />
       </div>
       <WeeklyPlanner user={user} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
-      <Nav setPage={setPage} />
     </div>
   );
 }
