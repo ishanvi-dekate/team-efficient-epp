@@ -11,6 +11,7 @@ import Settings from "./Pages/Settings.jsx";
 import Tracker from "./Pages/Tracker.jsx";
 import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
+import Info from "./Pages/Info.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -36,7 +37,13 @@ function App() {
       setUser(firebaseUser);
       if (firebaseUser) {
         const saved = getCookie("page");
-        setPage(saved && !LOGIN_PAGES.includes(saved) ? saved : "Home");
+        const isNewUser = sessionStorage.getItem('isNewUser') === 'true';
+        if (isNewUser) {
+          sessionStorage.removeItem('isNewUser');
+          setPage("Info");
+        } else {
+          setPage(saved && !LOGIN_PAGES.includes(saved) ? saved : "Home");
+        }
       } else {
         deleteCookie("page");
         setPage("LoginPage");
@@ -60,7 +67,7 @@ function App() {
 
   // Pages that should show the Nav menu (after login)
   // "Todo" is excluded because Tracker.jsx includes Nav directly
-const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
+  const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account" && page !== "Info";
   return (
     <>
       {showNav && <Header />}
@@ -71,6 +78,8 @@ const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
       {page === "Settings" && <Settings setPage={setPage} />}
       {page === "Mental" && <Mental setPage={setPage} />}
       {page ==="Profile" && <Profile setPage={setPage} />}
+      {page === "Info" && <Info setPage={setPage} />}
+
 
       {page === "Todo" && <Tracker setPage={setPage} />}
       {showNav && <Nav setPage={setPage} currentPage={page} />}
