@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
 import Nav from "./Components/Nav.jsx";
+import Header from "./Components/Header.jsx";
 import Home from "./Pages/Home.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import Login from "./Components/Login.jsx";
 import Account from "./Pages/Account.jsx";
 import Settings from "./Pages/Settings.jsx";
+import Tracker from "./Pages/Tracker.jsx";
 import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
-import Tracker from "./Pages/Tracker.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -57,20 +58,22 @@ function App() {
 
   if (authLoading) return null;
 
-  // "Todo" excluded because Tracker.jsx renders Nav directly
-  const showNav = !LOGIN_PAGES.includes(page) && page !== "Home" && page !== "Todo";
-
+  // Pages that should show the Nav menu (after login)
+  // "Todo" is excluded because Tracker.jsx includes Nav directly
+const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account" && page !== "Home";
   return (
     <>
-      {page === "LoginPage" && <LoginPage setPage={navigateTo} />}
-      {page === "Login"     && <Login     setPage={navigateTo} />}
-      {page === "Account"   && <Account   setPage={navigateTo} />}
-      {page === "Home"      && <Home      setPage={navigateTo} user={user} />}
-      {page === "Settings"  && <Settings  setPage={navigateTo} />}
-      {page === "Mental"    && <Mental    setPage={navigateTo} />}
-      {page === "Profile"   && <Profile   setPage={navigateTo} />}
-      {page === "Todo"      && <Tracker   setPage={navigateTo} user={user} />}
-      {showNav && <Nav setPage={navigateTo} currentPage={page} />}
+      {showNav && <Header />}
+      {page === "LoginPage" && <LoginPage setPage={setPage} />}
+      {page === "Login" && <Login setPage={setPage} />}
+      {page === "Account" && <Account setPage={setPage} />}
+      {page === "Home" && <Home setPage={setPage} />}
+      {page === "Settings" && <Settings setPage={setPage} />}
+      {page === "Mental" && <Mental setPage={setPage} />}
+      {page ==="Profile" && <Profile setPage={setPage} />}
+
+      {page === "Todo" && <Tracker setPage={setPage} user={user} />}
+      {showNav && <Nav setPage={setPage} currentPage={page} />}
     </>
   );
 }
