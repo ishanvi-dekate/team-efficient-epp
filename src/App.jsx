@@ -81,7 +81,7 @@ function App() {
       {page === "Info" && <Info setPage={setPage} />}
 
 
-      {page === "Todo" && <Tracker setPage={setPage} />}
+      {page === "Todo" && <Tracker setPage={setPage} user={user} />}
       {showNav && <Nav setPage={setPage} currentPage={page} />}
     </>
   );
