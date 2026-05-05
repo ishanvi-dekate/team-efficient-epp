@@ -10,7 +10,7 @@
 
 .todo-date-label {
   font-size: 0.8rem;
-  color: #4a6cf7;
+  color: #A78BFA;
   font-weight: 600;
   margin: -0.25rem 0 0.75rem;
 }
@@ -43,7 +43,7 @@
 }
 
 .todo-time-input:focus {
-  border-color: #4a6cf7;
+  border-color: #A78BFA;
 }
 
 .todo-input {
@@ -58,12 +58,12 @@
 }
 
 .todo-input:focus {
-  border-color: #4a6cf7;
+  border-color: #A78BFA;
 }
 
 .todo-add-btn {
   padding: 0.45rem 1rem;
-  background: #4a6cf7;
+  background: #A78BFA;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -73,7 +73,7 @@
 }
 
 .todo-add-btn:hover {
-  background: #3a5ce5;
+  background: #806ecf;
 }
 
 .todo-items {
@@ -115,7 +115,7 @@
 
 .todo-due-time {
   font-size: 0.75rem;
-  color: #4a6cf7;
+  color: #A78BFA;
   font-weight: 600;
   background: #eef1ff;
   border-radius: 4px;
