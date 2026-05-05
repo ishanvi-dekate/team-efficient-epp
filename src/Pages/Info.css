@@ -1,0 +1,235 @@
+.info-page {
+  width: 100%;
+  flex: 1;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Top banner */
+.info-banner {
+  background: #7C6FE8;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: #FFFFFF;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+}
+
+.info-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.info-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Content area */
+.info-content {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.info-instructions {
+  text-align: center;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  color: #1F2937;
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+}
+
+/* Username row */
+.info-username-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.info-username-label {
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.info-username-input {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #E5E7EB;
+  border-radius: 999px;
+  background: #F3F0FF;
+  font-size: 1rem;
+  font-family: inherit;
+  min-width: 280px;
+}
+
+.info-username-input:focus {
+  outline: none;
+  border-color: #7C6FE8;
+}
+
+/* Question card grid - 3 columns on wide screens */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Each question card */
+.info-card {
+  background: #EDE9FE;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  color: #1F2937;
+}
+
+.info-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.info-card input[type="text"],
+.info-card textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #FFFFFF;
+  resize: vertical;
+}
+
+.info-card input:focus,
+.info-card textarea:focus {
+  outline: none;
+  border-color: #7C6FE8;
+}
+
+/* Goals card spans full width and centers */
+.info-goals-card {
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+  width: 100%;
+}
+
+.info-goals-label {
+  font-weight: 600;
+  text-align: center;
+}
+
+.info-goal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.info-goal-row span {
+  font-weight: 600;
+  min-width: 1.5rem;
+}
+
+.info-goal-row input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #FFFFFF;
+}
+
+/* Note text */
+.info-note {
+  text-align: center;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  color: #4B5563;
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Agreement checkbox */
+.info-agree {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  color: #1F2937;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Error message */
+.info-error {
+  text-align: center;
+  color: #DC2626;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  margin: 0 0 1rem;
+}
+
+/* Create Account button */
+.info-submit {
+  display: block;
+  margin: 0 auto 2rem;
+  background: #A5BDF4;
+  color: #1F2937;
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 2.5rem;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.info-submit:hover {
+  background: #8FA8E8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.info-submit:active {
+  transform: translateY(0);
+}
+
+/* Mobile: stack to one column */
+@media (max-width: 900px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-title {
+    font-size: 1.3rem;
+  }
+
+  .info-username-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-username-input {
+    min-width: auto;
+    width: 100%;
+  }
+}
