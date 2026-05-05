@@ -3,11 +3,11 @@ import Button from "../Components/Button";
 import "./Home.css";
 
 
-function Home({ setPage }) {
+function Home({ setPage, user }) {
   return (
     <main className="home-page">
       <div className="home-banner">
-        <h2 className="home-title">Welcome Back,  </h2>
+        <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
       </div>
 
       <section className="home-cards">
