@@ -1,0 +1,204 @@
+.weekly-planner {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 0 2rem 5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.weekly-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.weekly-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1F2937;
+}
+
+.weekly-nav {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #1F2937;
+  transition: background 0.15s;
+}
+
+.weekly-nav:hover {
+  background: #f0f0f0;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.weekly-day {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0.6rem 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.weekly-day:hover {
+  border-color: #a5b4fc;
+  background: #f8f9ff;
+}
+
+.weekly-day-today {
+  border-color: #4a6cf7;
+  background: #f0f4ff;
+}
+
+.weekly-day-selected {
+  border-color: #4a6cf7;
+  background: #eef1ff;
+  box-shadow: 0 0 0 2px #a5b4fc;
+}
+
+.weekly-day-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.weekly-day-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.weekly-day-num {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1F2937;
+  line-height: 1;
+}
+
+.weekly-day-today .weekly-day-num {
+  color: #4a6cf7;
+}
+
+.weekly-day-selected .weekly-day-num {
+  color: #4a6cf7;
+}
+
+.weekly-progress-bar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.weekly-progress-fill {
+  height: 100%;
+  background: #4a6cf7;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.weekly-todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.weekly-empty {
+  font-size: 0.72rem;
+  color: #ccc;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.weekly-todo-item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: #374151;
+  overflow: hidden;
+}
+
+.weekly-todo-done .weekly-todo-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.weekly-todo-time {
+  font-size: 0.65rem;
+  color: #4a6cf7;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.weekly-todo-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weekly-count {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .weekly-planner {
+    margin: 0 1rem 5rem;
+    padding: 1rem;
+  }
+
+  .weekly-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .weekly-day {
+    padding: 0.4rem 0.3rem;
+    min-height: 90px;
+  }
+
+  .weekly-day-num {
+    font-size: 0.9rem;
+  }
+
+  .weekly-todo-item {
+    font-size: 0.65rem;
+  }
+
+  .weekly-title {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekly-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
