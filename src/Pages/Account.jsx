@@ -99,7 +99,7 @@ function Account({ setPage }) {
           className="account-back-btn"
           onClick={() => setPage('Login')}
         >
-          Already have an account? Log in
+          Have a Google Account or already have an account? Log in
         </button>
       </section>
     </main>
