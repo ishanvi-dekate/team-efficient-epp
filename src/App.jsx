@@ -60,7 +60,7 @@ function App() {
 
   // Pages that should show the Nav menu (after login)
   // "Todo" is excluded because Tracker.jsx includes Nav directly
-const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account";
+const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account" && page !== "Home";
   return (
     <>
       {showNav && <Header />}
