@@ -4,7 +4,7 @@ function Nav({ setPage, currentPage }) {
   const navItems = [
     { label: 'Home', target: 'Home' },
     { label: 'Tracker', target: 'Todo' },
-    { label: 'Mental State', target: 'Mental' },
+    { label: 'Mental Check', target: 'Mental' },
     { label: 'Settings', target: 'Settings' },
     { label: 'Profile', target: 'Profile' },
   ];

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Nav from '../Components/Nav';
 import TodoList from '../Components/Todo';
 import CalendarManager from '../Components/Calander';
 import WeeklyPlanner from '../Components/WeeklyPlanner';
