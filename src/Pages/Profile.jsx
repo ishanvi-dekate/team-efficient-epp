@@ -1,6 +1,5 @@
 import React from "react";
 import "./Profile.css";
-import Header from "../Components/Header";
 function Profile(){
     return(<>
      <div className="profile-page">

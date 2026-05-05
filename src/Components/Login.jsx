@@ -1,32 +1,12 @@
 import { useState } from "react";
 import { auth, provider } from "../firebase";
-import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup, signInWithEmailAndPassword, getAdditionalUserInfo } from "firebase/auth";
 import "./Login.css";
 
 function Login({ setPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
-  const actionCodeSettings = {
-  // URL you want to redirect back to. The domain (www.example.com) for this
-  // URL must be in the authorized domains list in the Firebase Console.
-  url: 'https://www.example.com/finishSignUp?cartId=1234',
-  // This must be true.
-  handleCodeInApp: true,
-  iOS: {
-    bundleId: 'com.example.ios'
-  },
-  android: {
-    packageName: 'com.example.android',
-    installApp: true,
-    minimumVersion: '12'
-  },
-  // The domain must be configured in Firebase Hosting and owned by the project.
-  linkDomain: 'custom-domain.com'
-};
-
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,8 +34,17 @@ function Login({ setPage }) {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithPopup(auth, provider);
-      setPage("Home");
+      const result = await signInWithPopup(auth, provider);
+      const additionalInfo = getAdditionalUserInfo(result);
+      
+      if (additionalInfo?.isNewUser) {
+        // First time Google login -> send to onboarding
+        sessionStorage.setItem('isNewUser', 'true');
+        setPage("Info");
+      } else {
+        // Returning user -> go straight to Home
+        setPage("Home");
+      }
     } catch (err) {
       setError("Google sign-in failed. Please try again.");
       console.error(err);
