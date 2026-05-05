@@ -6,12 +6,18 @@ import {
 } from 'firebase/firestore';
 import './Todo.css';
 
-function TodoList({ user }) {
+function formatLabel(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function TodoList({ user, selectedDate }) {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [dueTime, setDueTime] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Subscribe to this user's todos in Firestore
   useEffect(() => {
     if (!user) {
       setTodos([]);
@@ -35,14 +41,19 @@ function TodoList({ user }) {
     return unsubscribe;
   }, [user]);
 
+  const visibleTodos = todos.filter(t => t.date === selectedDate);
+
   const addTodo = async () => {
     if (!input.trim() || !user) return;
     await addDoc(collection(db, 'users', user.uid, 'todos'), {
       text: input.trim(),
       done: false,
       createdAt: Date.now(),
+      date: selectedDate,
+      dueTime: dueTime || null,
     });
     setInput('');
+    setDueTime('');
   };
 
   const toggleTodo = (id, currentDone) =>
@@ -58,6 +69,9 @@ function TodoList({ user }) {
   return (
     <div className="todo-list">
       <h2 className="todo-title">To-Do List</h2>
+      {selectedDate && (
+        <p className="todo-date-label">{formatLabel(selectedDate)}</p>
+      )}
       <div className="todo-input-row">
         <input
           className="todo-input"
@@ -67,6 +81,13 @@ function TodoList({ user }) {
           onKeyDown={handleKeyDown}
           placeholder="Add a new task..."
         />
+        <input
+          className="todo-time-input"
+          type="time"
+          value={dueTime}
+          onChange={e => setDueTime(e.target.value)}
+          title="Due time (optional)"
+        />
         <button className="todo-add-btn" onClick={addTodo}>Add</button>
       </div>
 
@@ -74,10 +95,10 @@ function TodoList({ user }) {
         <p className="todo-empty">Loading...</p>
       ) : (
         <ul className="todo-items">
-          {todos.length === 0 && (
-            <li className="todo-empty">No tasks yet. Add one above!</li>
+          {visibleTodos.length === 0 && (
+            <li className="todo-empty">No tasks for this day. Add one above!</li>
           )}
-          {todos.map(todo => (
+          {visibleTodos.map(todo => (
             <li key={todo.id} className={`todo-item ${todo.done ? 'todo-item-done' : ''}`}>
               <input
                 type="checkbox"
@@ -85,6 +106,9 @@ function TodoList({ user }) {
                 onChange={() => toggleTodo(todo.id, todo.done)}
               />
               <span className="todo-text">{todo.text}</span>
+              {todo.dueTime && (
+                <span className="todo-due-time">{todo.dueTime}</span>
+              )}
               <button className="todo-delete-btn" onClick={() => deleteTodo(todo.id)}>✕</button>
             </li>
           ))}
