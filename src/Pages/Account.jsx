@@ -36,6 +36,8 @@ function Account({ setPage }) {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      // Mark this as a new user so App.jsx knows to send them to Info, not Home
+      sessionStorage.setItem('isNewUser', 'true');
       setPage('Info');
     } catch (err) {
       // Firebase gives detailed error codes; show a friendly message
