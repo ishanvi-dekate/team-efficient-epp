@@ -6,6 +6,7 @@ function Home({ setPage, user }) {
     <main className="home-page">
       <div className="home-banner">
         <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
+        <SearchBar user={user} setPage={setPage} />
       </div>
 
       <section className="home-cards">
