@@ -1,9 +1,12 @@
 import Card from "../Components/Card";
 import Button from "../Components/Button";
 import "./Home.css";
+import Header from "../Components/Header";
 
 function Home({ setPage }) {
   return (
+    <>
+    <Header />
     <main className="home-page">
       <div className="home-banner">
         <h2 className="home-title">Welcome Back!</h2>
@@ -28,6 +31,7 @@ function Home({ setPage }) {
         <Button text="View Settings" onClick={() => setPage('Settings')} />
       </section>
     </main>
+    </>
   );
 }
 
