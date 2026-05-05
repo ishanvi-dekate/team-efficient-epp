@@ -1,11 +1,13 @@
 import React from "react";
 import "./Profile.css";
+import Header from "../Components/Header";
+import Info from "./Info";
 function Profile(){
     return(<>
      <div className="profile-page">
       <div className="profile-banner">
         <h2 className="profile-title">Profile</h2>
-        <h6 className="profile-username">        </h6>
+        <h6 className="profile-username">Hi! {formData.username}</h6>
       </div>
       <div className="profile-content">
         <div className="profile-content-grade">Grade:    </div>
