@@ -19,7 +19,6 @@ function Info({ setPage }) {
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState('');
 
-  // Update one field at a time
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -27,7 +26,6 @@ function Info({ setPage }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validate username
     if (!formData.username.trim()) {
       setError('Please set a username.');
       return;
@@ -42,10 +40,9 @@ function Info({ setPage }) {
     // Clear errors and proceed
     setError('');
 
-    // TODO: Save to Firestore later
+    localStorage.setItem('userProfile', JSON.stringify(formData));
     console.log('User profile data:', formData);
 
-    // Send user to Home page
     setPage('Home');
   };
 
