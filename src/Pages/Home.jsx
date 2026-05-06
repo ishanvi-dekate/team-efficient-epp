@@ -1,4 +1,5 @@
 import Card from "../Components/Card";
+import SearchBar from "../Components/SearchBar";
 import "./Home.css";
 
 function Home({ setPage, user }) {
