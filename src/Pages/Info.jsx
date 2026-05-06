@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { auth, db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import './Info.css';
-import { db, auth } from '../firebase';
-import { setDoc, doc } from 'firebase/firestore';
 
 function Info({ setPage }) {
   // All form data in one object - cleaner than 7 separate useStates
