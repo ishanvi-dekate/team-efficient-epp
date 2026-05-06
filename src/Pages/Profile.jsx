@@ -1,16 +1,50 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import Info from "./Info.jsx";
+import { db, auth } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Profile(){
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const saved = localStorage.getItem('userProfile');
-    if (saved) {
-      setProfile(JSON.parse(saved));
-    }
+    const fetchProfile = async () => {
+      try {
+        const user = auth.currentUser;
+        console.log('Current user UID:', user?.uid);
+        console.log('Current user email:', user?.email);
+        
+        if (!user) {
+          setError('Please log in first.');
+          setLoading(false);
+          return;
+        }
+        const docRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProfile(docSnap.data());
+        } else {
+          setError('No profile found. Please complete your profile setup first.');
+        }
+      } catch (error) {
+        setError('Error loading profile: ' + error.message);
+        console.error("Error fetching profile:", error);  
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfile();
   }, []);
+
+  if (loading) {
+    return <div className="profile-page">Loading profile...</div>;
+  }
+
+  if (error) {
+    return <div className="profile-error">{error}</div>;
+  }
 
   if (!profile) {
     return <div className="profile-page">No profile data found</div>;

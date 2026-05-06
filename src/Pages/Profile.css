@@ -5,6 +5,17 @@
     display: flex;
     flex-direction: column;
   }
+  .profile-error {
+    width: 100%;
+    flex: 1;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+    font-size: 1.5rem;
+  }
   
   /* Light blue banner with title */
   .profile-banner {
