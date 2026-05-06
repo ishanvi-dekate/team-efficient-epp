@@ -1,3 +1,47 @@
 .card {
+  position: relative;
+  overflow: hidden;
   color: black;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.018);
+  box-shadow: 0 12px 32px rgba(115, 100, 210, 0.22) !important;
+}
+
+.card:active {
+  transform: translateY(-1px) scale(1.005);
+  transition-duration: 0.08s;
+}
+
+.card-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover .card-shimmer {
+  animation: shimmer-slide 0.55s ease-out forwards;
+}
+
+.card-title {
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  position: relative;
+  z-index: 2;
 }
