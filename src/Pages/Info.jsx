@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { auth, db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import './Info.css';
+import { db, auth } from '../firebase';
+import { setDoc, doc } from 'firebase/firestore';
 
 function Info({ setPage }) {
   // All form data in one object - cleaner than 7 separate useStates
@@ -20,16 +22,15 @@ function Info({ setPage }) {
   });
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Update one field at a time
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validate username
     if (!formData.username.trim()) {
       setError('Please set a username.');
       return;
@@ -43,15 +44,35 @@ function Info({ setPage }) {
 
     // Clear errors and proceed
     setError('');
+    setLoading(true);
 
-    // Save profile to Firestore
-    const user = auth.currentUser;
-    if (user) {
-      setDoc(doc(db, 'users', user.uid, 'profile'), formData).catch(console.error);
+    try {
+      // Get current user
+      const user = auth.currentUser;
+      
+      if (!user) {
+        setError('Please log in first.');
+        setLoading(false);
+        return;
+      }
+
+      // Save to Firestore using user's ID
+      await setDoc(doc(db, 'users', user.uid), {
+        ...formData,
+        userId: user.uid,
+        email: user.email,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      });
+
+      console.log('User profile saved to Firestore');
+      setPage('Home');
+    } catch (error) {
+      setError('Error saving profile: ' + error.message);
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
-
-    // Send user to Home page
-    setPage('Home');
   };
 
   return (
@@ -212,8 +233,8 @@ function Info({ setPage }) {
 
           {error && <p className="info-error">{error}</p>}
 
-          <button type="submit" className="info-submit">
-            Create Account
+          <button type="submit" className="info-submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Create Account'}
           </button>
         </form>
       </div>
