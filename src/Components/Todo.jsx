@@ -17,6 +17,8 @@ function TodoList({ user, selectedDate }) {
   const [input, setInput] = useState('');
   const [dueTime, setDueTime] = useState('');
   const [loading, setLoading] = useState(true);
+  const [deletingIds, setDeletingIds] = useState(new Set());
+  const [justAddedId, setJustAddedId] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -45,13 +47,15 @@ function TodoList({ user, selectedDate }) {
 
   const addTodo = async () => {
     if (!input.trim() || !user) return;
-    await addDoc(collection(db, 'users', user.uid, 'todos'), {
+    const docRef = await addDoc(collection(db, 'users', user.uid, 'todos'), {
       text: input.trim(),
       done: false,
       createdAt: Date.now(),
       date: selectedDate,
       dueTime: dueTime || null,
     });
+    setJustAddedId(docRef.id);
+    setTimeout(() => setJustAddedId(null), 700);
     setInput('');
     setDueTime('');
   };
@@ -59,8 +63,17 @@ function TodoList({ user, selectedDate }) {
   const toggleTodo = (id, currentDone) =>
     updateDoc(doc(db, 'users', user.uid, 'todos', id), { done: !currentDone });
 
-  const deleteTodo = (id) =>
-    deleteDoc(doc(db, 'users', user.uid, 'todos', id));
+  const deleteTodo = (id) => {
+    setDeletingIds(prev => new Set([...prev, id]));
+    setTimeout(() => {
+      deleteDoc(doc(db, 'users', user.uid, 'todos', id));
+      setDeletingIds(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }, 320);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') addTodo();
@@ -99,7 +112,15 @@ function TodoList({ user, selectedDate }) {
             <li className="todo-empty">No tasks for this day. Add one above!</li>
           )}
           {visibleTodos.map(todo => (
-            <li key={todo.id} className={`todo-item ${todo.done ? 'todo-item-done' : ''}`}>
+            <li
+              key={todo.id}
+              className={[
+                'todo-item',
+                todo.done ? 'todo-item-done' : '',
+                deletingIds.has(todo.id) ? 'todo-item-exiting' : '',
+                justAddedId === todo.id ? 'todo-item-entering' : '',
+              ].join(' ')}
+            >
               <input
                 type="checkbox"
                 checked={todo.done}

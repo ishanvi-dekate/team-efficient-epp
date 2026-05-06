@@ -1,0 +1,105 @@
+/* =========================================================
+   EFFICIENT.EPP — GLOBAL ANIMATIONS
+   ========================================================= */
+
+/* --- Page enter --- */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header water wave --- */
+@keyframes wave-sweep {
+  0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0.85; }
+  60%  { opacity: 0.4; }
+  100% { transform: translateX(130%) skewX(8deg); opacity: 0; }
+}
+
+/* --- Button ripple --- */
+@keyframes btn-ripple {
+  from { transform: scale(0); opacity: 0.5; }
+  to   { transform: scale(5); opacity: 0; }
+}
+
+/* --- Card entrance --- */
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(22px) scale(0.97); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* --- Card shimmer on hover --- */
+@keyframes shimmer-slide {
+  from { transform: translateX(-100%) skewX(-8deg); opacity: 0; }
+  20%  { opacity: 1; }
+  to   { transform: translateX(220%) skewX(-8deg); opacity: 0; }
+}
+
+/* --- Todo slide in --- */
+@keyframes todo-slide-in {
+  from { opacity: 0; transform: translateX(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* --- Todo slide out (delete) --- */
+@keyframes todo-slide-out {
+  from { opacity: 1; transform: translateX(0) scaleY(1); max-height: 60px; }
+  to   { opacity: 0; transform: translateX(-24px) scaleY(0); max-height: 0; padding: 0; margin: 0; }
+}
+
+/* --- Checkbox pop on toggle --- */
+@keyframes check-pop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.45) rotate(12deg); }
+  65%  { transform: scale(0.88) rotate(-6deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* --- Input focus glow pulse --- */
+@keyframes input-glow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(124, 111, 232, 0.28); }
+  50%       { box-shadow: 0 0 0 6px rgba(124, 111, 232, 0.1); }
+}
+
+/* --- Submit button celebration --- */
+@keyframes submit-celebrate {
+  0%   { transform: scale(1) rotate(0deg); }
+  15%  { transform: scale(1.13) rotate(-3deg); }
+  30%  { transform: scale(1.07) rotate(3deg); }
+  50%  { transform: scale(1.10) rotate(-2deg); }
+  70%  { transform: scale(1.04) rotate(1deg); }
+  85%  { transform: scale(1.02); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* --- Nav active indicator pop --- */
+@keyframes dot-pop {
+  0%   { transform: translateX(-50%) scale(0); opacity: 0; }
+  65%  { transform: translateX(-50%) scale(1.55); }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* --- Banner title slide down --- */
+@keyframes banner-title-in {
+  from { opacity: 0; transform: translateY(-12px); letter-spacing: 4px; }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Submit pulse glow (hover) --- */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 0 rgba(124,111,232,0); }
+  50%       { box-shadow: 0 4px 16px rgba(0,0,0,0.16), 0 0 20px 5px rgba(124,111,232,0.32); }
+}
+
+/* --- Settings / list item stagger entrance --- */
+@keyframes item-slide-in {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Bounce press --- */
+@keyframes bounce-press {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.93); }
+  70%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}

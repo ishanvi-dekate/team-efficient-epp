@@ -84,6 +84,7 @@ function App() {
 
       {page === "Todo" && <Tracker setPage={setPage} user={user} />}
       {showNav && <Nav setPage={setPage} currentPage={page} />}
+      <ChatBot user={user} />
     </>
   );
 }
