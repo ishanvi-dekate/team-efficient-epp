@@ -54,19 +54,19 @@
 }
 
 .weekly-day:hover {
-  border-color: #a5b4fc;
+  border-color: #cabbfd;
   background: #f8f9ff;
 }
 
 .weekly-day-today {
-  border-color: #4a6cf7;
+  border-color: #A78BFA;
   background: #f0f4ff;
 }
 
 .weekly-day-selected {
-  border-color: #4a6cf7;
+  border-color: #A78BFA;
   background: #eef1ff;
-  box-shadow: 0 0 0 2px #a5b4fc;
+  box-shadow: 0 0 0 2px #cabbfd;
 }
 
 .weekly-day-header {
@@ -94,11 +94,11 @@
 }
 
 .weekly-day-today .weekly-day-num {
-  color: #4a6cf7;
+  color: #A78BFA;
 }
 
 .weekly-day-selected .weekly-day-num {
-  color: #4a6cf7;
+  color: #A78BFA;
 }
 
 .weekly-progress-bar {
@@ -110,7 +110,7 @@
 
 .weekly-progress-fill {
   height: 100%;
-  background: #4a6cf7;
+  background: #A78BFA;
   border-radius: 2px;
   transition: width 0.3s ease;
 }
@@ -149,7 +149,7 @@
 
 .weekly-todo-time {
   font-size: 0.65rem;
-  color: #4a6cf7;
+  color: #A78BFA;
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;

@@ -4,9 +4,10 @@ import "./Mental.css";
 function Mental() {
   const [sleepTime, setSleepTime] = useState("");
   const [dayScale, setDayScale] = useState("");
+  const [stressLevel, setStressLevel] = useState("")
   const [wakeTime, setWakeTime] = useState("");
   const [worries, setWorries] = useState("");
-  const [celebrating, setCelebrating] = useState(false);
+  const[extraTime, setExtraTime] = useState("")
 
   const handleSubmit = () => {
     setCelebrating(true);
@@ -22,7 +23,7 @@ function Mental() {
       </div>
 
       <div className="mental-content">
-        <p className="mental-subtitle">Please fill out</p>
+        <p className="mental-subtitle">Please fill this out once every week so we can provide accurate data for you. </p>
 
         <div className="mental-grid">
           {/* Left column: questions 1 and 2 */}
@@ -44,6 +45,15 @@ function Mental() {
                 placeholder="Click to enter"
                 value={wakeTime}
                 onChange={(e) => setWakeTime(e.target.value)}
+              />
+            </div>
+            <div className="mental-question">
+              <label className="mental-card">On a scale from 1-5, how often have you felt that you were unable to control the important things over the last week?</label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value = {stressLevel}
+                onChange={(e) => setStressLevel(e.target.value)}
               />
             </div>
           </div>
@@ -72,6 +82,15 @@ function Mental() {
                 placeholder="Click to enter"
                 value={worries}
                 onChange={(e) => setWorries(e.target.value)}
+              />
+            </div>
+            <div className="mental-question">
+              <label className="mental-card">How much time did you spend on extracurriculars? </label>
+              <input
+                className="mental-input"
+                placeholder="Click to enter"
+                value= {extraTime}
+                onChange={(e) => setExtraTime(e.target.value)}
               />
             </div>
           </div>

@@ -1,13 +1,13 @@
 .home-page {
   width: 100%;
-  min-height: 100%;
+  flex: 1;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
-  animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow-y: auto;
 }
 
-/* Light blue banner */
+/* Light blue banner with welcome message */
 .home-banner {
   position: relative;
   overflow: hidden;
@@ -42,7 +42,7 @@
   animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
-/* Cards section */
+/* Top row: 3 info cards (Stress / TM / Sleep) */
 .home-cards {
   padding: 2rem;
   display: grid;
@@ -64,7 +64,6 @@
   font-weight: 500;
   text-align: left;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  animation: card-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .home-cards > *:nth-child(1) { animation-delay: 0.1s; }
@@ -76,17 +75,110 @@
 .home-buttons > *:nth-child(3) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.44s both; }
 .home-buttons > *:nth-child(4) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.50s both; }
 
-.home-buttons {
-  padding: 1rem 2rem 2rem;
+/* Icon buttons section */
+.home-icons {
+  padding: 1rem 2rem 3rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
 }
 
+/* Each icon button: circle + label below */
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Quicksand', 'Nunito', system-ui, sans-serif;
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+}
+
+.icon-btn:focus-visible .icon-circle {
+  box-shadow: 0 0 0 3px #7C6FE8, 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* The colored circle background */
+.icon-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.icon-btn:hover .icon-circle {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* The line-art icon inside the circle */
+.icon-svg {
+  width: 50px;
+  height: 50px;
+}
+
+/* Color variants — soft pastel backgrounds with deep purple stroke */
+.icon-btn-purple .icon-circle {
+  background: #EDE9FE;
+}
+.icon-btn-purple .icon-svg {
+  color: #6D28D9;
+}
+.icon-btn-purple:hover .icon-circle {
+  background: #DDD6FE;
+}
+
+.icon-btn-blue .icon-circle {
+  background: #DBEAFE;
+}
+.icon-btn-blue .icon-svg {
+  color: #1D4ED8;
+}
+.icon-btn-blue:hover .icon-circle {
+  background: #BFDBFE;
+}
+
+.icon-btn-pink .icon-circle {
+  background: #FCE7F3;
+}
+.icon-btn-pink .icon-svg {
+  color: #BE185D;
+}
+.icon-btn-pink:hover .icon-circle {
+  background: #FBCFE8;
+}
+
+.icon-btn-orange .icon-circle {
+  background: #FFEDD5;
+}
+.icon-btn-orange .icon-svg {
+  color: #C2410C;
+}
+.icon-btn-orange:hover .icon-circle {
+  background: #FED7AA;
+}
+
+/* Label below icon */
+.icon-label {
+  color: #1F2937;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Mobile: cards stack, icons shrink */
 @media (max-width: 640px) {
   .home-cards {
     grid-template-columns: 1fr;
@@ -94,5 +186,24 @@
 
   .home-title {
     font-size: 1.5rem;
+  }
+
+  .home-icons {
+    gap: 1rem;
+    padding: 1rem 1rem 2rem;
+  }
+
+  .icon-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon-svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .icon-label {
+    font-size: 0.85rem;
   }
 }
