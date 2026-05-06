@@ -12,6 +12,7 @@ import Tracker from "./Pages/Tracker.jsx";
 import Mental from "./Pages/Mental.jsx";
 import Profile from "./Pages/Profile.jsx";
 import Info from "./Pages/Info.jsx";
+import ChatBot from "./Components/ChatBot.jsx";
 
 const LOGIN_PAGES = ["LoginPage", "Login"];
 
@@ -75,7 +76,7 @@ function App() {
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
-      {page === "Home" && <Home setPage={setPage} />}
+      {page === "Home" && <Home setPage={setPage} user={user} />}
       {page === "Settings" && <Settings setPage={setPage} />}
       {page === "Mental" && <Mental setPage={setPage} />}
       {page ==="Profile" && <Profile setPage={setPage} />}

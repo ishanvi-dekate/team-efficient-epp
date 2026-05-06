@@ -10,7 +10,8 @@ function Mental() {
   const[extraTime, setExtraTime] = useState("")
 
   const handleSubmit = () => {
-    // TODO: save to Firestore
+    setCelebrating(true);
+    setTimeout(() => setCelebrating(false), 700);
     console.log({ sleepTime, dayScale, wakeTime, worries });
     alert("Submitted! (saving to database coming soon)");
   };
@@ -58,7 +59,7 @@ function Mental() {
           </div>
 
           {/* Center submit button */}
-          <button className="mental-submit" onClick={handleSubmit}>
+          <button className={`mental-submit ${celebrating ? 'celebrating' : ''}`} onClick={handleSubmit}>
             Click to<br />upload it!
           </button>
 

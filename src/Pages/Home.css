@@ -9,12 +9,27 @@
 
 /* Light blue banner with welcome message */
 .home-banner {
+  position: relative;
+  overflow: hidden;
   background: #A5BDF4;
   padding: 1.5rem 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+}
+
+.home-banner::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 50%;
+  height: 140%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  border-radius: 0 55% 55% 0;
+  animation: wave-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  pointer-events: none;
 }
 
 .home-title {
@@ -24,6 +39,7 @@
   font-size: 2rem;
   font-weight: 400;
   letter-spacing: 1px;
+  animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 /* Top row: 3 info cards (Stress / TM / Sleep) */
@@ -50,9 +66,14 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.home-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+.home-cards > *:nth-child(1) { animation-delay: 0.1s; }
+.home-cards > *:nth-child(2) { animation-delay: 0.18s; }
+.home-cards > *:nth-child(3) { animation-delay: 0.26s; }
+
+.home-buttons > *:nth-child(1) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.32s both; }
+.home-buttons > *:nth-child(2) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.38s both; }
+.home-buttons > *:nth-child(3) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.44s both; }
+.home-buttons > *:nth-child(4) { animation: card-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.50s both; }
 
 /* Icon buttons section */
 .home-icons {

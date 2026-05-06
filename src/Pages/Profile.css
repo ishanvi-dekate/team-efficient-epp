@@ -4,17 +4,44 @@
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
+    animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .profile-error {
+    width: 100%;
+    flex: 1;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+    font-size: 1.5rem;
   }
   
   /* Light blue banner with title */
   .profile-banner {
+    position: relative;
+    overflow: hidden;
     background: #A5BDF4;
     padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
+  .profile-banner::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 50%;
+    height: 140%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+    border-radius: 0 55% 55% 0;
+    animation: wave-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
+    pointer-events: none;
+  }
+
   .profile-title {
     margin: 0;
     color: #FFFFFF;
@@ -22,6 +49,7 @@
     font-size: 2.5rem;
     font-weight: 400;
     letter-spacing: 1px;
+    animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
   }
   
   .profile-content {
