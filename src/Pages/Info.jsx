@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { auth, db } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import './Info.css';
 
 function Info({ setPage }) {
@@ -42,8 +44,11 @@ function Info({ setPage }) {
     // Clear errors and proceed
     setError('');
 
-    // TODO: Save to Firestore later
-    console.log('User profile data:', formData);
+    // Save profile to Firestore
+    const user = auth.currentUser;
+    if (user) {
+      setDoc(doc(db, 'users', user.uid, 'profile'), formData).catch(console.error);
+    }
 
     // Send user to Home page
     setPage('Home');
