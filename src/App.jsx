@@ -64,7 +64,7 @@ function App() {
 const showNav = page !== "LoginPage" && page !== "Login" && page !== "Account" && page !== "Home";
   return (
     <>
-      {showNav && <Header />}
+      {showNav && <Header key={page} />}
       {page === "LoginPage" && <LoginPage setPage={setPage} />}
       {page === "Login" && <Login setPage={setPage} />}
       {page === "Account" && <Account setPage={setPage} />}
