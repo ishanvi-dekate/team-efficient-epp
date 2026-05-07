@@ -1,11 +1,13 @@
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import HomeChat from "../Components/HomeChat";
 import "./Home.css";
 
 function Home({ setPage, user }) {
   return (
     <main className="home-page">
       <div className="home-banner">
+        <div className="home-banner-bg" />
         <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
         <SearchBar user={user} setPage={setPage} />
       </div>
@@ -21,6 +23,8 @@ function Home({ setPage, user }) {
           Monitor your sleep patterns.
         </Card>
       </section>
+
+      <HomeChat user={user} setPage={setPage} />
 
       <section className="home-icons">
         {/* To-Do: Checklist icon */}
@@ -50,17 +54,7 @@ function Home({ setPage, user }) {
           <span className="icon-label">Mental State</span>
         </button>
 
-        {/* Settings: Gear icon */}
-        <button className="icon-btn icon-btn-orange" onClick={() => setPage('Settings')}>
-          <div className="icon-circle">
-            <svg className="icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="32" cy="32" r="6"/>
-              <path d="M32 8 L32 14 M32 50 L32 56 M8 32 L14 32 M50 32 L56 32 M15 15 L19 19 M45 45 L49 49 M15 49 L19 45 M45 19 L49 15"/>
-              <circle cx="32" cy="32" r="14"/>
-            </svg>
-          </div>
-          <span className="icon-label">Settings</span>
-        </button>
+       
 
         {/* Profile: Person icon */}
         <button className="icon-btn icon-btn-pink" onClick={() => setPage('Profile')}>
@@ -71,6 +65,18 @@ function Home({ setPage, user }) {
             </svg>
           </div>
           <span className="icon-label">Profile</span>
+        </button>
+      
+         {/* Settings: Gear icon */}
+        <button className="icon-btn icon-btn-orange" onClick={() => setPage('Settings')}>
+          <div className="icon-circle">
+            <svg className="icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="32" cy="32" r="6"/>
+              <path d="M32 8 L32 14 M32 50 L32 56 M8 32 L14 32 M50 32 L56 32 M15 15 L19 19 M45 45 L49 49 M15 49 L19 45 M45 19 L49 15"/>
+              <circle cx="32" cy="32" r="14"/>
+            </svg>
+          </div>
+          <span className="icon-label">Settings</span>
         </button>
       </section>
     </main>
