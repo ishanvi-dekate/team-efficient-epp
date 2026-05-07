@@ -5,8 +5,8 @@ function Nav({ setPage, currentPage }) {
     { label: 'Home', target: 'Home' },
     { label: 'Tracker', target: 'Todo' },
     { label: 'Mental Check', target: 'Mental' },
-    { label: 'Settings', target: 'Settings' },
     { label: 'Profile', target: 'Profile' },
+    { label: 'Settings', target: 'Settings' },
   ];
 
   return (

@@ -85,6 +85,35 @@
   50%       { opacity: 0.4; }
 }
 
+.cb-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cb-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, background 0.15s;
+}
+
+.cb-clear:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cb-clear:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .cb-close {
   background: none;
   border: none;
