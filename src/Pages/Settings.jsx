@@ -309,7 +309,7 @@ function FocusModeModal() {
       </p>
       <div className="sm-focus-wrap">
         <span className="sm-focus-label">
-          {enabled ? '🎯 Focus Mode is ON' : '😌 Focus Mode is OFF'}
+          {enabled ? 'Focus Mode is ON' : 'Focus Mode is OFF'}
         </span>
         <button
           className={`sm-toggle sm-toggle-lg ${enabled ? 'on' : ''}`}
@@ -442,7 +442,7 @@ function DangerZoneModal({ setPage }) {
   return (
     <>
       <p className="sm-info sm-danger-info">
-        ⚠️ Deleting your account is permanent and cannot be undone. All your todos, profile info, and settings will be lost forever.
+        Deleting your account is permanent and cannot be undone. All your todos, profile info, and settings will be lost forever.
       </p>
 
       <div className="sm-field">
