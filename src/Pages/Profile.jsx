@@ -26,7 +26,7 @@ function Profile() {
         if (docSnap.exists()) {
           setProfile(docSnap.data());
         } else {
-          setError('No profile found. Please complete your profile setup first.');
+          setError('No profile found. Please complete your profile setup first. Or try to refresh it.');
         }
       } catch (error) {
         setError('Error loading profile: ' + error.message);
