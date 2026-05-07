@@ -20,7 +20,7 @@ function Profile(){
           setLoading(false);
           return;
         }
-        const docRef = doc(db, 'users', user.uid);
+        const docRef = doc(db, 'users', user.uid, 'profile', 'data');
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
