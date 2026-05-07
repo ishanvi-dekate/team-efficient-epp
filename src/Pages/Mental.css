@@ -169,6 +169,33 @@
   outline-offset: 3px;
 }
 
+.mental-success {
+  background: #d1fae5;
+  color: #065f46;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-size: 0.95rem;
+  animation: item-slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mental-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.mental-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
 /* Mobile: stack everything in a single column */
 @media (max-width: 768px) {
   .mental-grid {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
+import { checkAndSendNotifications } from "./services/emailService.js";
 import Nav from "./Components/Nav.jsx";
 import Header from "./Components/Header.jsx";
 import Home from "./Pages/Home.jsx";
@@ -45,6 +46,7 @@ function App() {
         } else {
           setPage(saved && !LOGIN_PAGES.includes(saved) ? saved : "Home");
         }
+        checkAndSendNotifications(firebaseUser);
       } else {
         deleteCookie("page");
         setPage("LoginPage");
