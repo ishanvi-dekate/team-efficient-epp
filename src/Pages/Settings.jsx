@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { signOut, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  emailjsConfigured,
+  sendDailyReminder,
+  sendWeeklyDigest,
+  sendDeadlineAlert,
+  checkAndSendNotifications,
+} from '../services/emailService';
 import './Settings.css';
 
 // ─── Modal wrapper ──────────────────────────────────────────────────────────
@@ -94,13 +101,15 @@ function ManageAccountModal() {
 // ─── Notifications ──────────────────────────────────────────────────────────
 function NotificationsModal() {
   const user = auth.currentUser;
+  const configured = emailjsConfigured();
   const [prefs, setPrefs] = useState({
     emailReminders: false,
     weeklyDigest: false,
     taskDeadlines: false,
   });
   const [saving, setSaving] = useState(false);
-  const [status, setStatus] = useState('');
+  const [testing, setTesting] = useState(null); // which test is in progress
+  const [status, setStatus] = useState({ text: '', ok: true });
 
   useEffect(() => {
     if (!user) return;
@@ -111,46 +120,118 @@ function NotificationsModal() {
 
   const toggle = (key) => setPrefs((p) => ({ ...p, [key]: !p[key] }));
 
+  const flash = (text, ok = true) => {
+    setStatus({ text, ok });
+    setTimeout(() => setStatus({ text: '', ok: true }), 3500);
+  };
+
   const save = async () => {
     if (!user) return;
     setSaving(true);
     try {
       await setDoc(doc(db, 'users', user.uid, 'settings', 'notifications'), prefs);
-      setStatus('Saved!');
-      setTimeout(() => setStatus(''), 2500);
+      flash('Preferences saved!');
     } catch {
-      setStatus('Failed to save.');
+      flash('Failed to save.', false);
     } finally { setSaving(false); }
   };
 
-  const options = [
-    { key: 'emailReminders', label: 'Daily task reminders via email' },
-    { key: 'weeklyDigest', label: 'Weekly progress digest' },
-    { key: 'taskDeadlines', label: 'Deadline alerts' },
+  const sendTest = async (type) => {
+    if (!user || !configured) return;
+    setTesting(type);
+    try {
+      if (type === 'daily')   await sendDailyReminder(user);
+      if (type === 'weekly')  await sendWeeklyDigest(user);
+      flash(`Test email sent to ${user.email}!`);
+    } catch (err) {
+      flash(`Failed: ${err.message}`, false);
+    } finally { setTesting(null); }
+  };
+
+  const requestDeadlinePerms = async () => {
+    if (!('Notification' in window)) { flash('Browser notifications not supported.', false); return; }
+    const perm = await Notification.requestPermission();
+    if (perm === 'granted') {
+      flash('Browser notifications enabled!');
+      new Notification('Efficient EPP', { body: 'Deadline alerts are now active.' });
+    } else {
+      flash('Permission denied. Enable notifications in browser settings.', false);
+    }
+  };
+
+  const emailOptions = [
+    { key: 'emailReminders', label: 'Daily task reminders', testType: 'daily',  desc: 'Sent each morning with your tasks for the day.' },
+    { key: 'weeklyDigest',   label: 'Weekly progress digest', testType: 'weekly', desc: 'Sent every Monday with a summary of your week.' },
   ];
 
   return (
     <>
-      <p className="sm-info">Choose which notifications you'd like to receive.</p>
+      {!configured && (
+        <div className="sm-setup-banner">
+          <strong>EmailJS not configured.</strong> Add these to your <code>.env.local</code> to enable email sending:
+          <pre className="sm-setup-code">{`VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key`}</pre>
+          <a className="sm-setup-link" href="https://www.emailjs.com/" target="_blank" rel="noreferrer">
+            Create a free EmailJS account →
+          </a>
+          <p className="sm-setup-hint">Your template should accept variables: <code>to_email</code>, <code>to_name</code>, <code>subject</code>, <code>message</code>.</p>
+        </div>
+      )}
+
       <div className="sm-toggles">
-        {options.map(({ key, label }) => (
-          <label key={key} className="sm-toggle-row">
-            <span>{label}</span>
+        {emailOptions.map(({ key, label, testType, desc }) => (
+          <div key={key} className="sm-notif-row">
+            <div className="sm-notif-info">
+              <label className="sm-toggle-row" style={{ marginBottom: '0.15rem' }}>
+                <span style={{ fontWeight: 700 }}>{label}</span>
+                <button
+                  className={`sm-toggle ${prefs[key] ? 'on' : ''}`}
+                  onClick={() => toggle(key)}
+                  role="switch"
+                  aria-checked={prefs[key]}
+                >
+                  <span className="sm-thumb" />
+                </button>
+              </label>
+              <p className="sm-notif-desc">{desc}</p>
+            </div>
             <button
-              className={`sm-toggle ${prefs[key] ? 'on' : ''}`}
-              onClick={() => toggle(key)}
+              className="sm-btn sm-btn-outline sm-btn-sm"
+              onClick={() => sendTest(testType)}
+              disabled={!configured || testing === testType}
+              title={configured ? 'Send a test email now' : 'Configure EmailJS first'}
+            >
+              {testing === testType ? 'Sending…' : 'Send test'}
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="sm-notif-row">
+        <div className="sm-notif-info">
+          <label className="sm-toggle-row" style={{ marginBottom: '0.15rem' }}>
+            <span style={{ fontWeight: 700 }}>Deadline alerts</span>
+            <button
+              className={`sm-toggle ${prefs.taskDeadlines ? 'on' : ''}`}
+              onClick={() => toggle('taskDeadlines')}
               role="switch"
-              aria-checked={prefs[key]}
+              aria-checked={prefs.taskDeadlines}
             >
               <span className="sm-thumb" />
             </button>
           </label>
-        ))}
+          <p className="sm-notif-desc">Browser pop-up 30 min before a task is due. No email needed.</p>
+        </div>
+        <button className="sm-btn sm-btn-outline sm-btn-sm" onClick={requestDeadlinePerms}>
+          Enable
+        </button>
       </div>
+
       <button className="sm-btn" onClick={save} disabled={saving}>
         {saving ? 'Saving…' : 'Save Preferences'}
       </button>
-      {status && <p className="sm-success">{status}</p>}
+      {status.text && <p className={status.ok ? 'sm-success' : 'sm-error'}>{status.text}</p>}
     </>
   );
 }

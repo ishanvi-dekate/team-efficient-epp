@@ -521,6 +521,85 @@
   border-top: 1px solid #e5e7eb;
 }
 
+/* ── Notification rows ─────────────────────────────────────────────────────── */
+.sm-notif-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.sm-notif-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sm-notif-desc {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.sm-btn-sm {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ── EmailJS setup banner ──────────────────────────────────────────────────── */
+.sm-setup-banner {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-size: 0.88rem;
+  color: #92400e;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sm-setup-code {
+  background: #1f2937;
+  color: #a5f3fc;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.78rem;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+}
+
+.sm-setup-link {
+  color: #d97706;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sm-setup-hint {
+  color: #78716c;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.sm-setup-hint code {
+  background: #f3f4f6;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.77rem;
+  color: #374151;
+}
+
 /* ── Danger zone ───────────────────────────────────────────────────────────── */
 .sm-danger-info {
   color: #b91c1c;

@@ -1,83 +1,161 @@
 .profile-page {
-    width: 100%;
-    flex: 1;
-    background: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  .profile-error {
-    width: 100%;
-    flex: 1;
-    background: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
-    font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
-    font-size: 1.5rem;
-  }
-  
-  /* Light blue banner with title */
-  .profile-banner {
-    position: relative;
-    overflow: hidden;
-    background: #A5BDF4;
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  width: 100%;
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
-  .profile-banner::after {
-    content: '';
-    position: absolute;
-    top: -20%;
-    left: 0;
-    width: 50%;
-    height: 140%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
-    border-radius: 0 55% 55% 0;
-    animation: wave-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
-    pointer-events: none;
-  }
+.profile-banner {
+  position: relative;
+  overflow: hidden;
+  background: #A5BDF4;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.profile-banner::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 50%;
+  height: 140%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  border-radius: 0 55% 55% 0;
+  animation: wave-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
+  pointer-events: none;
+}
+
+.profile-title {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.profile-content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 680px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.profile-username {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1f2937;
+  background: #f0f4ff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ── Table ── */
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Quicksand', system-ui, sans-serif;
+}
+
+.profile-row:nth-child(even) {
+  background: #f9fafb;
+}
+
+.profile-row:nth-child(odd) {
+  background: #ffffff;
+}
+
+.profile-row:last-child .profile-cell-label,
+.profile-row:last-child .profile-cell-value {
+  border-bottom: none;
+}
+
+.profile-cell-label {
+  width: 38%;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.profile-cell-value {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 500;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.profile-goals-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-goals-list li {
+  color: #1f2937;
+}
+
+/* ── States ── */
+.profile-loading,
+.profile-error-msg {
+  padding: 3rem 2rem;
+  text-align: center;
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.profile-error-msg {
+  color: #b91c1c;
+}
+
+@media (max-width: 640px) {
   .profile-title {
-    margin: 0;
-    color: #FFFFFF;
-    font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-    animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+    font-size: 2rem;
   }
-  
+
   .profile-content {
-    color: black;
-    letter-spacing: 1px;
-    font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
-    font-size: 1rem;
-    flex: 1;
-    padding: 3rem 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    padding: 1rem;
   }
-  @media (max-width: 640px) {
-    .profile-grid {
-      grid-template-columns: 1fr;
-      grid-auto-flow: row;
-      grid-template-rows: none;
-      gap: 1rem;
-    }
-  
-    .profile-title {
-      font-size: 2rem;
-    }
-  
-    .profile-content {
-      padding: 2rem 1.5rem;
-    }
+
+  .profile-cell-label {
+    width: 42%;
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
   }
-  
-  
+
+  .profile-cell-value {
+    padding: 0.7rem 1rem;
+    font-size: 0.88rem;
+  }
+}

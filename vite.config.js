@@ -8,7 +8,7 @@ export default defineConfig({
     {
       name: 'github-ai-proxy',
       configureServer(server) {
-        // POST /ai/chat  →  GitHub Models API (gpt-4o-mini, free, uses injected GITHUB_TOKEN)
+        // POST /ai/chat  →  GitHub Models API (gpt-4o, free, uses injected GITHUB_TOKEN)
         server.middlewares.use('/ai/chat', async (req, res) => {
           let body = '';
           req.on('data', c => (body += c));
@@ -28,7 +28,7 @@ export default defineConfig({
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ model: 'gpt-4o-mini', messages, max_tokens: 1000 }),
+                body: JSON.stringify({ model: 'gpt-4o', messages, max_tokens: 2000 }),
               });
 
               if (!ghRes.ok) {

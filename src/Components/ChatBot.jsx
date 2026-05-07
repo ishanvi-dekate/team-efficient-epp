@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { db } from '../firebase';
 import {
   collection, addDoc, getDocs, deleteDoc, updateDoc,
-  doc, query, orderBy,
+  doc, query, orderBy, getDoc,
 } from 'firebase/firestore';
 import './ChatBot.css';
 
@@ -28,7 +28,7 @@ async function callAI(messages) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },
-    body: JSON.stringify({ model: 'gpt-4o-mini', messages, max_tokens: 1000 }),
+    body: JSON.stringify({ model: 'gpt-4o', messages, max_tokens: 2000 }),
   });
   if (!res.ok) throw new Error(`GitHub Models ${res.status}: ${await res.text()}`);
   const data = await res.json();
@@ -89,10 +89,29 @@ function parseToolCall(text) {
   return null;
 }
 
-const SYSTEM_PROMPT = `You are a helpful AI assistant built into Efficient EPP, a student productivity app.
-Today is ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.
+function buildSystemPrompt(profile) {
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-You can manage the user's todo list using tools. To call a tool, respond with ONLY a raw JSON object — no markdown fences, no explanation, just the JSON on its own line:
+  const profileSection = profile ? `
+## About this student
+- Username: ${profile.username || 'not set'}
+- Usual bedtime: ${profile.bedtime || 'not set'}
+- Average sleep: ${profile.sleepHours || 'not set'}
+- Biggest stressor: ${profile.stress || 'not set'}
+- External distractions: ${profile.distractions || 'none listed'}
+- Extracurriculars: ${profile.extracurriculars || 'none listed'}
+- Most homework-heavy class: ${profile.homeworkClass || 'not set'}
+- Current courses: ${profile.courses || 'not set'}
+- Goals: ${[profile.goal1, profile.goal2, profile.goal3].filter(Boolean).join('; ') || 'none set'}
+` : '';
+
+  return `You are an intelligent AI study coach built into Efficient EPP, a student productivity app.
+Today is ${today}.
+${profileSection}
+Use this profile context to give personalized, specific advice — not generic tips. Reference their actual courses, goals, and stressors when relevant.
+
+## Tools
+You can read and manage the student's todo list. To call a tool, respond with ONLY a raw JSON object on its own line (no markdown, no explanation before it):
 
 {"tool":"list_todos","args":{}}
 {"tool":"list_todos","args":{"date":"YYYY-MM-DD"}}
@@ -100,11 +119,14 @@ You can manage the user's todo list using tools. To call a tool, respond with ON
 {"tool":"update_todo","args":{"id":"<id>","text":"...","date":"YYYY-MM-DD","dueTime":"HH:MM","done":true}}
 {"tool":"delete_todo","args":{"id":"<id>"}}
 
-Rules:
-- Always call list_todos first before editing anything so you have real IDs.
-- When asked to fix or optimise a schedule, use the tools to actually do it — do not just give advice.
-- After all tool calls are finished, reply in plain friendly text summarising what changed.
-- When NOT calling a tool, respond in plain text only (no JSON).`;
+## Rules
+- Always call list_todos before editing — you need real IDs.
+- When asked to fix or optimise a schedule, use the tools and actually make the changes, don't just suggest.
+- After all tool calls, reply in plain friendly text summarising what you did.
+- When NOT calling a tool, respond in plain conversational text only — no JSON.
+- Give specific, actionable advice based on the student's profile. If they have a stressful class or a goal, reference it directly.
+- Keep responses concise and encouraging.`;
+}
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function ChatBot({ user }) {
@@ -113,26 +135,31 @@ export default function ChatBot({ user }) {
   const [input, setInput]                 = useState('');
   const [loading, setLoading]             = useState(false);
   const [historyLoaded, setHistoryLoaded] = useState(false);
-  const historyRef                        = useRef([]); // [{role,content}] for Puter
+  const historyRef                        = useRef([]);
+  const profileRef                        = useRef(null);
   const bottomRef                         = useRef(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
-  // Load persisted history from Firestore
+  // Load user profile + chat history from Firestore
   useEffect(() => {
     if (!user) return;
-    const q = query(collection(db, 'users', user.uid, 'chatHistory'), orderBy('timestamp', 'asc'));
-    getDocs(q)
-      .then(snap => {
-        const stored = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
-        setMessages(stored.map((m, i) => ({ id: i, ...m })));
-        // Rebuild Puter-format history (user + assistant only, no action chips)
-        historyRef.current = stored
-          .filter(m => !m.isAction && (m.role === 'user' || m.role === 'assistant'))
-          .map(m => ({ role: m.role, content: m.text }));
-        setHistoryLoaded(true);
-      })
-      .catch(() => setHistoryLoaded(true));
+
+    const profilePromise = getDoc(doc(db, 'users', user.uid))
+      .then(snap => { if (snap.exists()) profileRef.current = snap.data(); })
+      .catch(() => {});
+
+    const historyPromise = getDocs(
+      query(collection(db, 'users', user.uid, 'chatHistory'), orderBy('timestamp', 'asc'))
+    ).then(snap => {
+      const stored = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+      setMessages(stored.map((m, i) => ({ id: i, ...m })));
+      historyRef.current = stored
+        .filter(m => !m.isAction && (m.role === 'user' || m.role === 'assistant'))
+        .map(m => ({ role: m.role, content: m.text }));
+    }).catch(() => {});
+
+    Promise.all([profilePromise, historyPromise]).finally(() => setHistoryLoaded(true));
   }, [user]);
 
   const pushMessage = (role, text, isAction = false) => {
@@ -154,9 +181,9 @@ export default function ChatBot({ user }) {
     saveToFirestore('user', userText);
 
     try {
-      // Build full message array for Puter: system + history + new user message
+      // Build full message array: system (with live profile) + history + new user message
       const messages = [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: buildSystemPrompt(profileRef.current) },
         ...historyRef.current,
         { role: 'user', content: userText },
       ];
@@ -205,6 +232,14 @@ export default function ChatBot({ user }) {
     setLoading(false);
   };
 
+  const clearChat = async () => {
+    if (!user || loading) return;
+    const snap = await getDocs(collection(db, 'users', user.uid, 'chatHistory'));
+    await Promise.all(snap.docs.map(d => deleteDoc(doc(db, 'users', user.uid, 'chatHistory', d.id))));
+    setMessages([]);
+    historyRef.current = [];
+  };
+
   if (!user) return null;
 
   return (
@@ -228,7 +263,19 @@ export default function ChatBot({ user }) {
               <span className="cb-status-dot" />
               AI Assistant
             </span>
-            <button className="cb-close" onClick={() => setOpen(false)}>✕</button>
+            <div className="cb-header-actions">
+              <button
+                className="cb-clear"
+                onClick={clearChat}
+                disabled={loading || messages.length === 0}
+                title="Clear chat history"
+              >
+                <svg viewBox="0 0 24 24" fill="none" width="15" height="15">
+                  <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button className="cb-close" onClick={() => setOpen(false)}>✕</button>
+            </div>
           </div>
 
           <div className="cb-messages">
