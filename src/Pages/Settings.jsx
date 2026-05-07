@@ -116,7 +116,7 @@ function NotificationsModal() {
     getDoc(doc(db, 'users', user.uid, 'settings', 'notifications')).then((snap) => {
       if (snap.exists()) setPrefs((p) => ({ ...p, ...snap.data() }));
     });
-  }, []);
+  }, [user]);
 
   const toggle = (key) => setPrefs((p) => ({ ...p, [key]: !p[key] }));
 
@@ -340,10 +340,10 @@ function PersonalInfoModal() {
 
   useEffect(() => {
     if (!user) return;
-    getDoc(doc(db, 'users', user.uid)).then((snap) => {
+    getDoc(doc(db, 'users', user.uid, 'profile', 'data')).then((snap) => {
       if (snap.exists()) setForm((f) => ({ ...f, ...snap.data() }));
     });
-  }, []);
+  }, [user]);
 
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
@@ -351,7 +351,7 @@ function PersonalInfoModal() {
     if (!user) return;
     setSaving(true);
     try {
-      await setDoc(doc(db, 'users', user.uid), { ...form, updatedAt: new Date().toISOString() }, { merge: true });
+      await setDoc(doc(db, 'users', user.uid, 'profile', 'data'), form);
       setStatus('Profile saved!');
       setTimeout(() => setStatus(''), 2500);
     } catch {

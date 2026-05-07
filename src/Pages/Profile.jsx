@@ -12,12 +12,25 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const user = auth.currentUser;
-        if (!user) { setError('Please log in first.'); setLoading(false); return; }
-        const snap = await getDoc(doc(db, 'users', user.uid));
-        if (snap.exists()) setProfile(snap.data());
-        else setError('No profile found. Complete your profile setup first.');
-      } catch (err) {
-        setError('Error loading profile: ' + err.message);
+        console.log('Current user UID:', user?.uid);
+        console.log('Current user email:', user?.email);
+        
+        if (!user) {
+          setError('Please log in first.');
+          setLoading(false);
+          return;
+        }
+        const docRef = doc(db, 'users', user.uid, 'profile', 'data');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProfile(docSnap.data());
+        } else {
+          setError('No profile found. Please complete your profile setup first.');
+        }
+      } catch (error) {
+        setError('Error loading profile: ' + error.message);
+        console.error("Error fetching profile:", error);  
       } finally {
         setLoading(false);
       }
