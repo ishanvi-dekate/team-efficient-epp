@@ -1,3 +1,5 @@
+@import './animations.css';
+
 :root {
   --text: #fdfdfd;
   --text-h: #ffffff;
@@ -63,15 +65,18 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
 #root {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 h1,

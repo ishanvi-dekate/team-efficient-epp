@@ -1,0 +1,62 @@
+.tracker-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tracker-banner {
+  position: relative;
+  overflow: hidden;
+  background: #A5BDF4;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tracker-banner::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 50%;
+  height: 140%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  border-radius: 0 55% 55% 0;
+  animation: wave-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
+  pointer-events: none;
+}
+
+.tracker-title {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Quicksand', 'Fredoka', system-ui, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  animation: banner-title-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.tracker-content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .tracker-title {
+    font-size: 2rem;
+  }
+
+  .tracker-content {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+}

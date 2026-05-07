@@ -1,90 +1,79 @@
-// Import React hooks and Firebase functionality
-import { useEffect, useState } from 'react';
-import { db, auth, provider } from 'team-efficient-epp\src\firebase.js';
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth'; // Auth methods
-import { collection, getDocs } from 'firebase/firestore'; // Firestore methods
+import { useState, useEffect } from 'react';
+import { auth, provider } from '../firebase.js';
+import { signInWithPopup, signOut, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 
-function Login({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+function Login({ setPage }) {
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      setPage?.('Home');
+    } catch (err) {
+      setError('Google sign-in failed. Please try again.');
+      console.error(err);
+    }
+  };
+
+  const handleEmailLogin = async (event) => {
     event.preventDefault();
-
-    if (!email.trim() || !password.trim()) {
-      setError("Please enter both email and password.");
-      return;
+    setError('');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setPage?.('Home');
+    } catch (err) {
+      setError('Incorrect email or password.');
+      console.error(err);
     }
+  };
 
-    if (!email.includes("@")) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    setError("");
-    onLogin?.();
+  const handleLogout = async () => {
+    await signOut(auth);
   };
 
   return (
-    <>
     <div>
-      {/* If user is logged in, show greeting, logout button, and messages */}
       {user ? (
         <div>
           <h2>Hello! Welcome to efficient.epp! Ready to track your schedule, {user.displayName}?</h2>
           <button onClick={handleLogout}>Log Out</button>
-
-          <ul>
-            {messages.map((msg, i) => (
-              <li key={i}>
-                <strong>{msg.name || 'Anon'}:</strong> {msg.text}
-              </li>
-            ))}
-          </ul>
         </div>
       ) : (
-        // If no user is logged in, show login button
         <div>
           <button onClick={handleLogin}>Login with Google</button>
           <p>Please login with your personal account!</p>
-        </div>
-      )}
-    </div>
-    
-    <main className="login-page">
-      <section className="login-card">
-        <h1>Login</h1>
-        <p>Sign in to continue using efficient.epp.</p>
 
-        {error && <p className="login-error">{error}</p>}
+          {error && <p>{error}</p>}
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email
+          <form onSubmit={handleEmailLogin}>
             <input
               type="email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
             />
-          </label>
-
-          <label>
-            Password
             <input
               type="password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
             />
-          </label>
-
-          <button type="submit">Log In</button>
-        </form>
-      </section>
-    </main>
-    </>
+            <button type="submit">Log In</button>
+          </form>
+        </div>
+      )}
+    </div>
   );
 }
-export default Login
+
+export default Login;

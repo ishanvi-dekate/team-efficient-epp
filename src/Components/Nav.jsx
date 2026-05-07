@@ -1,21 +1,29 @@
 import './Nav.css';
-import { useState } from 'react';
-import Home from '../Pages/Home.jsx';
 
-function Nav({ setPage }) {
+function Nav({ setPage, currentPage }) {
+  const navItems = [
+    { label: 'Home', target: 'Home' },
+    { label: 'Tracker', target: 'Todo' },
+    { label: 'Mental Check', target: 'Mental' },
+    { label: 'Profile', target: 'Profile' },
+    { label: 'Settings', target: 'Settings' },
+  ];
+
   return (
-    <footer>
-      <div className='navibar'>
-        <ul className = 'nav'>
-          <li onClick={() => setPage("Home")}>Home</li>
-          <li onClick={() => setPage("Todo")}>To-Do</li>
-          <li onClick={() => setPage("Mental")}>Mental Health</li>
-          <li onClick={() => setPage("Profile")}>Profile</li>
-          <li onClick={() => setPage("Settings")}>Settings</li>
-        </ul>
-      </div>
-      </footer>
+    <nav className="app-nav">
+      <ul className="app-nav-list">
+        {navItems.map((item) => (
+          <li
+            key={item.target}
+            className={`app-nav-item ${currentPage === item.target ? 'active' : ''}`}
+            onClick={() => setPage(item.target)}
+          >
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
-export default Nav
+export default Nav;

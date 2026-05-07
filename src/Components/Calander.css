@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+.calendar {
+  background: #FFF;
+  color: #2A1B5C;
+  border-radius: 24px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 360px;
+  width: 100%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.calendar-title {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: #2A1B5C;
+}
+
+.calendar-nav {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #A78BFA;
+  box-shadow: 0 2px 6px rgba(167, 139, 250, 0.15);
+  transition: transform 0.15s, background 0.15s;
+}
+
+.calendar-nav:hover {
+  background: #9778f4;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #A78BFA;
+  padding: 0.35rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.calendar-cell {
+  text-align: center;
+  padding: 0.45rem 0;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  min-height: 34px;
+  line-height: 1.6;
+  color: #2A1B5C;
+}
+
+.calendar-cell-active {
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.calendar-cell-active:hover {
+  background: #cabbfd;
+  transform: scale(1.05);
+}
+
+.calendar-cell-today {
+  background: #fff;
+  font-weight: 700;
+  color: #A78BFA;
+  border: 2px solid #A78BFA;
+}
+
+.calendar-cell-selected {
+  background: #A78BFA;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(167, 139, 250, 0.35);
+}
+
+.calendar-cell-selected.calendar-cell-today {
+  border: 2px solid #fff;
+}

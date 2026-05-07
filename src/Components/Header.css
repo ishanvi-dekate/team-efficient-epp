@@ -1,10 +1,31 @@
 .app-header {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   background: #7364D2;
   padding: 1.25rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header-wave {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 55%;
+  height: 140%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.07) 50%, transparent 100%);
+  border-radius: 0 60% 60% 0;
+  animation: wave-sweep 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+.header-wave-2 {
+  width: 35%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  animation: wave-sweep 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.18s forwards;
+  opacity: 0;
 }
 
 .app-header-brand {
@@ -14,6 +35,9 @@
   text-align: center;
   color: #FFFFFF;
   font-family: 'Quicksand', 'Fredoka', 'Comic Sans MS', system-ui, sans-serif;
+  position: relative;
+  z-index: 1;
+  animation: banner-title-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
 .app-header-name {
