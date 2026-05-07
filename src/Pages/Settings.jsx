@@ -494,13 +494,13 @@ function Settings({ setPage }) {
   };
 
   const options = [
-    { label: 'Manage Account',         key: 'ManageAccount',  icon: '👤' },
-    { label: 'Notification Preferences', key: 'Notifications', icon: '🔔' },
-    { label: 'Troubleshooting',         key: 'Troubleshooting', icon: '🔧' },
-    { label: 'Focus Mode',              key: 'FocusMode',      icon: '🎯' },
-    { label: 'Personal Information',    key: 'PersonalInfo',   icon: '📋' },
-    { label: 'Log Out',                 key: 'LogOut',         icon: '🚪' },
-    { label: 'Danger Zone',             key: 'DangerZone',     icon: '⚠️', danger: true },
+    { label: 'Manage Account',         key: 'ManageAccount',  icon: '' },
+    { label: 'Notification Preferences', key: 'Notifications', icon: '' },
+    { label: 'Troubleshooting',         key: 'Troubleshooting', icon: '' },
+    { label: 'Focus Mode',              key: 'FocusMode',      icon: '' },
+    { label: 'Personal Information',    key: 'PersonalInfo',   icon: '' },
+    { label: 'Log Out',                 key: 'LogOut',         icon: '' },
+    { label: 'Danger Zone',             key: 'DangerZone',     icon: '', danger: true },
   ];
 
   const handleClick = (opt) => {
