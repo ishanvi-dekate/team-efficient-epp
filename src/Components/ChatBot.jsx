@@ -582,8 +582,7 @@ export default function ChatBot({ user, setPage }) {
           <div className="cb-header">
             <span className="cb-title">
               <span className="cb-status-dot" />
-              Eppy
-              <span className="cb-mode-badge">{AI_MODES[mode].icon} {AI_MODES[mode].label}</span>
+             Eppy
             </span>
             <div className="cb-header-actions">
               <button
