@@ -1,11 +1,13 @@
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import HomeChat from "../Components/HomeChat";
 import "./Home.css";
 
 function Home({ setPage, user }) {
   return (
     <main className="home-page">
       <div className="home-banner">
+        <div className="home-banner-bg" />
         <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
         <SearchBar user={user} setPage={setPage} />
       </div>
@@ -21,6 +23,8 @@ function Home({ setPage, user }) {
           Monitor your sleep patterns.
         </Card>
       </section>
+
+      <HomeChat user={user} setPage={setPage} />
 
       <section className="home-icons">
         {/* To-Do: Checklist icon */}
