@@ -8,7 +8,7 @@ function Home({ setPage, user }) {
     <main className="home-page">
       <div className="home-banner">
         <div className="home-banner-bg" />
-        <h2 className="home-title">Welcome Back, {user?.displayName || user?.email || ""}</h2>
+        <h2 className="home-title">Welcome Back, {user?.username || user?.email || ""}</h2>
         <SearchBar user={user} setPage={setPage} />
       </div>
 
