@@ -216,7 +216,7 @@ async function executeTool(name, args, user, setPage) {
     return { success: true, enabled };
   }
   if (name === 'navigate_to') {
-    const VALID = ['Home','Settings','Mental','Profile','Todo'];
+    const VALID = ['Home','Settings','Mental','Profile','Todo','Study'];
     const page = args.page;
     if (!VALID.includes(page)) return { error: `Invalid page. Valid options: ${VALID.join(', ')}` };
     setPage(page);
@@ -330,7 +330,7 @@ To call a tool, respond with ONLY a raw JSON object — no markdown, no explanat
 
 ### Navigation
 {"tool":"navigate_to","args":{"page":"Home"}}
-Valid pages: Home, Settings, Mental, Profile, Todo
+Valid pages: Home, Settings, Mental, Profile, Todo, Study
 
 ### Mental Health History
 {"tool":"get_mental_checks","args":{"count":5}}
@@ -565,15 +565,22 @@ export default function ChatBot({ user, setPage }) {
 
   return (
     <>
-      <button className="cb-fab" onClick={() => setOpen(o => !o)} aria-label="Toggle AI chat">
+      <button
+        className={`cb-fab${open ? ' cb-fab--open' : ''}`}
+        onClick={() => setOpen(o => !o)}
+        aria-label={open ? 'Close Eppy AI assistant' : 'Open Eppy AI assistant'}
+      >
         {open ? (
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <>
+            <svg className="cb-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 12a8 8 0 01-11.5 7.2L4 21l1.8-5.5A8 8 0 1121 12z"/>
+            </svg>
+            <span className="cb-fab-label">Ask Eppy AI</span>
+          </>
         )}
       </button>
 

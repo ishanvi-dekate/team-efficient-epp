@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth, provider } from "../firebase";
-import { signInWithRedirect, getRedirectResult, signInWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail } from "firebase/auth";
+import { signInWithPopup, signInWithEmailAndPassword, getAdditionalUserInfo, sendPasswordResetEmail } from "firebase/auth";
 import "./Login.css";
 
 function Login({ setPage }) {
@@ -10,30 +10,6 @@ function Login({ setPage }) {
   const [resetSent, setResetSent] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
-
-  // Handle the redirect result when Google sends the user back
-  useEffect(() => {
-    setGoogleLoading(true);
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result) {
-          const additionalInfo = getAdditionalUserInfo(result);
-          if (additionalInfo?.isNewUser) {
-            sessionStorage.setItem('isNewUser', 'true');
-            setPage("Info");
-          } else {
-            setPage("Home");
-          }
-        }
-      })
-      .catch((err) => {
-        if (err.code !== 'auth/no-current-user') {
-          setError("Google sign-in failed. Please try again.");
-          console.error(err);
-        }
-      })
-      .finally(() => setGoogleLoading(false));
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,12 +57,24 @@ function Login({ setPage }) {
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
+    setGoogleLoading(true);
     try {
-      setError("");
-      await signInWithRedirect(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const additionalInfo = getAdditionalUserInfo(result);
+      if (additionalInfo?.isNewUser) {
+        sessionStorage.setItem('isNewUser', 'true');
+        setPage("Info");
+      } else {
+        setPage("Home");
+      }
     } catch (err) {
-      setError("Google sign-in failed. Please try again.");
-      console.error(err);
+      if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
+        setError("Google sign-in failed. Please try again.");
+        console.error(err);
+      }
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
