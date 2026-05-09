@@ -1,39 +1,62 @@
 /* ── Floating action button ───────────────────────────────────────────────── */
 .cb-fab {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: #A5BDF4;
+  bottom: calc(82px + env(safe-area-inset-bottom));
+  right: 16px;
+  height: 48px;
+  padding: 0 18px 0 14px;
+  border-radius: 24px;
+  background: #7C6FE8;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 18px rgba(130, 160, 230, 0.45);
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(124, 111, 232, 0.4);
   z-index: 1000;
-  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .cb-fab:hover {
-  background: #8FAEE8;
-  transform: scale(1.08);
-  box-shadow: 0 6px 22px rgba(130, 160, 230, 0.6);
+  background: #6558d4;
+  box-shadow: 0 6px 18px rgba(124, 111, 232, 0.5);
 }
 
-.cb-fab svg {
+.cb-fab:active { background: #5a4dc4; }
+
+.cb-fab--open {
+  width: 48px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.cb-fab--open svg {
   width: 22px;
   height: 22px;
   color: #ffffff;
 }
 
+.cb-fab-icon {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.cb-fab-label {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
 /* ── Chat panel ───────────────────────────────────────────────────────────── */
 .cb-panel {
   position: fixed;
-  bottom: 90px;
-  right: 24px;
+  bottom: calc(140px + env(safe-area-inset-bottom));
+  right: 16px;
   width: 350px;
   height: 490px;
   background: #ffffff;
