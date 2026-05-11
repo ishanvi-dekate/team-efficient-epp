@@ -66,7 +66,7 @@ function App() {
     setPage(newPage);
   };
 
-  if (authLoading) return null;
+  if (authLoading) return <LoginPage setPage={navigateTo} />;
 
   // Pages that should show the Nav menu (after login)
   // "Todo" is excluded because Tracker.jsx includes Nav directly
@@ -85,7 +85,7 @@ function App() {
       {page === "Info" && <Info setPage={navigateTo} />}
       {page === "Todo" && <Tracker setPage={navigateTo} user={user} />}
       {showNav && <Nav setPage={navigateTo} currentPage={page} />}
-      <ChatBot user={user} setPage={navigateTo} />
+      {page !== "Home" && <ChatBot user={user} setPage={navigateTo} />}
     </>
   );
 }
