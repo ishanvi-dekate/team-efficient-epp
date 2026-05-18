@@ -41,7 +41,7 @@ function HistoryEntry({ entry }) {
   );
 }
 
-function Mental() {
+function Mental({ setPage }) {
   const [sleepTime, setSleepTime]     = useState("");
   const [wakeTime, setWakeTime]       = useState("");
   const [stressLevel, setStressLevel] = useState("");
@@ -72,7 +72,6 @@ function Mental() {
         extraTime,
         submittedAt: Date.now(),
       });
-
       setCelebrating(true);
       setTimeout(() => setCelebrating(false), 700);
       setSubmitted(true);
@@ -122,6 +121,9 @@ function Mental() {
         <p className="mental-subtitle">
           Please fill this out once every week so we can provide accurate data for you.
         </p>
+        <div className="view-mental">
+          <button className="pastButton" onClick={() => setPage?.("ViewMental")}>View Past Mental Checks</button>
+        </div>
 
         {submitted && (
           <div className="mental-success">
@@ -213,7 +215,7 @@ function Mental() {
           </div>
         </div>
 
-        {/* Past uploads */}
+        {/* Past uploads inline */}
         <div className="mh-history-wrap">
           <button className="mh-history-btn" onClick={toggleHistory}>
             {showHistory ? '▲ Hide past check-ins' : '▼ View past check-ins'}
