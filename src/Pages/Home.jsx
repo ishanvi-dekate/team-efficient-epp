@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import SearchBar from "../Components/SearchBar";
 import HomeStatCards from "../Components/HomeStatCards";
+import HomeChat from "../Components/HomeChat";
 import "./Home.css";
 
 const GRAPH_COLOR = '#1E3A8A';
@@ -185,6 +186,7 @@ function Home({ setPage, user }) {
           <span className="icon-label">Settings</span>
         </button>
       </section>
+      <HomeChat user={user} setPage={setPage} />
     </main>
   );
 }

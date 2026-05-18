@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { db, auth } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./Mental.css";
@@ -13,6 +13,8 @@ function Mental() {
   const [celebrating, setCelebrating] = useState(false);
   const [submitted, setSubmitted]     = useState(false);
   const [error, setError]             = useState("");
+  const[viewMental, setviewMental] = useState(false)
+  const [page,setPage] = useState("")
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
@@ -29,7 +31,6 @@ function Mental() {
         extraTime,
         submittedAt: Date.now(),
       });
-
       setCelebrating(true);
       setTimeout(() => setCelebrating(false), 700);
       setSubmitted(true);
@@ -46,7 +47,11 @@ function Mental() {
       console.error(err);
     }
   };
-
+  const viewPast = async() => {
+    setviewMental(true);
+    if(viewMental)
+      setPage("ViewMental");
+  }
   return (
     <div className="mental-page">
       <div className="mental-banner">
@@ -57,15 +62,17 @@ function Mental() {
         <p className="mental-subtitle">
           Please fill this out once every week so we can provide accurate data for you.
         </p>
-
+        <div className = "view-mental">
+          <button className = "pastButton" onClick= {viewPast}>View Past Mental Checks</button>
+        </div>
         {submitted && (
           <div className="mental-success">
-            ✅ Check-in saved! Come back next week.
+            Check-in saved! Come back next week
           </div>
+        
         )}
 
         {error && <p className="mental-error">{error}</p>}
-
         <div className="mental-grid">
           {/* Left column */}
           <div className="mental-column">
