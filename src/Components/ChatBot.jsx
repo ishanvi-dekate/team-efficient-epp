@@ -121,18 +121,26 @@ async function callAI(messages) {
   const token = import.meta.env.VITE_GEMINI_KEY;
   if (!token) throw new Error('Add VITE_GEMINI_KEY to .env.local to enable AI in production.');
 
-  const res = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-    body: JSON.stringify({ model: 'gemini-2.0-flash', messages, max_tokens: 2000 }),
-  });
-  if (res.status === 429) throw new Error('The AI is temporarily rate-limited. Please wait a moment and try again.');
-  if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? '';
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, attempt * 3000));
+
+    const res = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ model: 'gemini-2.0-flash', messages, max_tokens: 2000 }),
+    });
+
+    if (res.status === 429) {
+      if (attempt < 2) continue;
+      throw new Error('The AI is busy right now. Please wait a moment and try again.');
+    }
+    if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content ?? '';
+  }
 }
 
 // ── Firestore tool execution ─────────────────────────────────────────────────
